@@ -1,8 +1,8 @@
-name: build and deploy mkdocs to github pages
+name: build and deploy github pages
 on:
   push:
     branches:
-      - master
+      - development
 jobs:
   deploy:
     runs-on: ubuntu-latest
