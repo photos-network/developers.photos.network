@@ -6,5 +6,9 @@ Its core features are:
 - Filter / Search photos by attributes like location or date
 - Group photos by objects like people of objects
 
-## developers.photos.network
+### Documentation
 This repository contains the documentation for developers like contributors and maintainer.
+
+### Discord server
+Wanna chat with like-minded developers? Join this Discord and exchange your views, discuss and have fun.
+https://discord.gg/dGFDpmWp46
