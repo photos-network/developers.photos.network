@@ -234,6 +234,18 @@
   
 
       
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../faq/" class="md-tabs__link">
+      FAQ
+    </a>
+  </li>
+
+      
     </ul>
   </div>
 </nav>
@@ -336,46 +348,36 @@
       
     
     
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Getting started
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
     <a href="./" class="md-nav__link md-nav__link--active">
       Getting started
     </a>
     
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#prepare-setup" class="md-nav__link">
-    Prepare setup
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#run" class="md-nav__link">
-    Run
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="structure/" class="md-nav__link">
+      Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="env/" class="md-nav__link">
+      Environment
+    </a>
   </li>
 
         
@@ -559,6 +561,19 @@
   </li>
 
     
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../faq/" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -578,28 +593,6 @@
   
     
   
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#prepare-setup" class="md-nav__link">
-    Prepare setup
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#run" class="md-nav__link">
-    Run
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -625,24 +618,6 @@
 <li><strong>Persistency</strong>  (read / write data)</li>
 <li><strong>Task Processing</strong>  (keep track of running tasks)</li>
 </ul>
-<h2 id="prepare-setup">Prepare setup</h2>
-<p>Prepare an environment by running:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>$ python3 -m venv venv
-$ <span class="nb">source</span> ./venv/bin/activate
-<span class="o">(</span>venv<span class="o">)</span>$ pip3 install -r requirements_test.txt
-</code></pre></div>
-</td></tr></table></p>
-<p>After the environment is build, install the core:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="o">(</span>venv<span class="o">)</span>$ python3 setup.py install
-</code></pre></div>
-</td></tr></table></p>
-<h2 id="run">Run</h2>
-<p>The core can be started from the venv:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="o">(</span>venv<span class="o">)</span>$ python3 ./venv/bin/core
-</code></pre></div>
-</td></tr></table></p>
                 
                   
                 

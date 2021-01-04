@@ -13,14 +13,14 @@
         <meta name="author" content="Stürmer, Benjamin">
       
       
-        <link rel="canonical" href="https://developers.photos.network/mobile/">
+        <link rel="canonical" href="https://developers.photos.network/faq/">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
     
     
       
-        <title>General - Developers</title>
+        <title>FAQ - Developers</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mobile" class="md-skip">
+        <a href="#frequently-asked-questions" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              General
+              FAQ
             
           </span>
         </div>
@@ -219,15 +219,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="./" class="md-tabs__link md-tabs__link--active">
+      <a href="../mobile/" class="md-tabs__link">
         Mobile
       </a>
     </li>
@@ -237,10 +235,12 @@
         
   
   
+    
+  
 
 
   <li class="md-tabs__item">
-    <a href="../faq/" class="md-tabs__link">
+    <a href="./" class="md-tabs__link md-tabs__link--active">
       FAQ
     </a>
   </li>
@@ -485,14 +485,12 @@
       
 
 
-  
-
 
   
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
     
     <label class="md-nav__link" for="nav-5">
       Mobile
@@ -511,20 +509,11 @@
           
 
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../mobile/" class="md-nav__link">
       General
     </a>
-    
   </li>
 
         
@@ -535,7 +524,7 @@
 
 
   <li class="md-nav__item">
-    <a href="android/" class="md-nav__link">
+    <a href="../mobile/android/" class="md-nav__link">
       Android
     </a>
   </li>
@@ -548,7 +537,7 @@
 
 
   <li class="md-nav__item">
-    <a href="ios/" class="md-nav__link">
+    <a href="../mobile/ios/" class="md-nav__link">
       iOS
     </a>
   </li>
@@ -564,11 +553,20 @@
       
 
 
+  
 
-  <li class="md-nav__item">
-    <a href="../faq/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       FAQ
     </a>
+    
   </li>
 
     
@@ -600,13 +598,34 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/photos-network/developers.photos.network/edit/master/docs/mobile/index.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/photos-network/developers.photos.network/edit/master/docs/faq.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="mobile">Mobile</h1>
-<p>Native mobile clients aren't limited in background execution wich is mandatory to sync data with the photos.network instance.</p>
+                <h1 id="frequently-asked-questions">Frequently asked questions</h1>
+<p><strong>Where comes the hype from</strong></p>
+<ul>
+<li>With the <a href="https://en.wikipedia.org/wiki/General_Data_Protection_Regulation">enforcement of GDPR in May 2018</a> an increased interested in data privacy arrised.</li>
+<li><a href="https://www.google.com/intl/en-GB/picasa/">Retirement of Googles Picassa</a></li>
+<li><a href="https://support.google.com/photos/answer/10100180">Google announced to change its storage policy</a> starting in June 2021 where users are limited to 15GB of free space.</li>
+</ul>
+<p><strong>Why another photo management application instead of contributing to one of the hundred existing ones?</strong></p>
+<p>The list of <a href="https://github.com/awesome-selfhosted/awesome-selfhosted#photo-and-video-galleries">photo and video gallery projects</a> out there is amazing.
+Testing most of them ended in at least one of few complains:
+ - sluggish performance
+ - easy installation and setup
+ - working with existing folder structure
+ - supporting multiple <abbr title="Terabyte">TB</abbr> of photos and videos
+ - process <abbr title="unprocessed image data from the image sensor">RAW</abbr> files
+ - lack of control
+ - privacy</p>
+<p><strong>Why not use or contribute to one of the big players?</strong></p>
+<ul>
+<li><strong>Plex</strong> is great for browsing and viewing photos, but it doesn't offer an API wich can be used by 3rd party clients.</li>
+<li><strong>Nextcloud</strong> can't work with <abbr title="unprocessed image data from the image sensor">RAW</abbr> files or existing folder structures</li>
+<li><strong><a href="https://github.com/hooram/ownphotos">Ownphotos</a>/LibrePhotos</strong> lacks of extensibility</li>
+</ul>
                 
               
               
