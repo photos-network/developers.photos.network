@@ -50,6 +50,7 @@ nav:
       - 'metadata': 'addons/metadata.md'
       - 'nextcloud': 'addons/nextcloud.md'
       - 'places365': 'addons/places365.md'
+      - 'sqlite': 'addons/sqlite.md'
   - 'Frontend': 'frontend/index.md'
   - 'Mobile':
       - 'General': 'mobile/index.md'
