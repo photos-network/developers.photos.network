@@ -13,14 +13,14 @@
         <meta name="author" content="Stürmer, Benjamin">
       
       
-        <link rel="canonical" href="https://developers.photos.network/mobile/">
+        <link rel="canonical" href="https://developers.photos.network/overview/">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
     
     
       
-        <title>General - Developers</title>
+        <title>Overview - Developers</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mobile" class="md-skip">
+        <a href="#overview" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              General
+              Overview
             
           </span>
         </div>
@@ -175,13 +175,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../overview/" class="md-tabs__link">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
         Getting started
       </a>
     </li>
@@ -239,15 +241,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="./" class="md-tabs__link md-tabs__link--active">
+      <a href="../mobile/" class="md-tabs__link">
         Mobile
       </a>
     </li>
@@ -287,6 +287,8 @@
         <div class="md-main__inner md-grid">
           
             
+              
+                
               
               <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
                 <div class="md-sidebar__scrollwrap">
@@ -342,12 +344,14 @@
       
 
 
+  
+
 
   
-  <li class="md-nav__item md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       Getting started
@@ -366,11 +370,20 @@
           
 
 
+  
 
-  <li class="md-nav__item">
-    <a href="../overview/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Overview
     </a>
+    
   </li>
 
         
@@ -692,14 +705,12 @@
       
 
 
-  
-
 
   
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
     
     <label class="md-nav__link" for="nav-6">
       Mobile
@@ -718,20 +729,11 @@
           
 
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../mobile/" class="md-nav__link">
       General
     </a>
-    
   </li>
 
         
@@ -742,7 +744,7 @@
 
 
   <li class="md-nav__item">
-    <a href="android/" class="md-nav__link">
+    <a href="../mobile/android/" class="md-nav__link">
       Android
     </a>
   </li>
@@ -755,7 +757,7 @@
 
 
   <li class="md-nav__item">
-    <a href="ios/" class="md-nav__link">
+    <a href="../mobile/ios/" class="md-nav__link">
       iOS
     </a>
   </li>
@@ -800,7 +802,9 @@
             
             
               
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" hidden>
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -820,14 +824,31 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/photos-network/developers.photos.network/edit/master/docs/mobile/index.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/photos-network/developers.photos.network/edit/master/docs/overview.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="mobile">Mobile</h1>
-<p>Native mobile clients aren't limited in background execution wich is mandatory to sync data with the <a href="https://photos.network">photos.network</a> instance.</p>
-<p>The Web Application should of course be mobile friendly, so users aren't forced to use the native app.</p>
+                <h1 id="overview">Overview</h1>
+<p><a href="https://photos.network">Photos.network</a> is planned as a modulare system with heavy focus on customization.
+It is separated in:</p>
+<ul>
+<li><a href="/core/">Core</a> responsible for tasks e.g.: Authentication, Addons, task processing</li>
+<li><a href="/addons/">Addons</a> customizational part of the system wich can easily be extended by users</li>
+<li><a href="/frontend/">Frontend</a> App-like Web Application for browsing photos and administrate the system</li>
+<li><a href="/mobile/">Mobile</a> Native mobile clients for Android and iOS</li>
+<li><a href="/supervisor/">Supervisor</a> Container abstraction to keep the core system up-and-running e.g.: Docker</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>The supervisor will keep the core system up-to-date and package the core system into containers e.g. Docker&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+                  
                 
               
               
