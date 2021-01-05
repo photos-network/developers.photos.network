@@ -13,20 +13,30 @@ Each addon is encapsulated in a separate directory wich have to contain at least
 
 
 #### addon.json
-In th `addon.json` developers need to specify a domain for their addon, this domain will be used in the [configuration]() 
-file. python requirements can be specified as list either by name or with exact version info.
+In `addon.json` developers need to specify a unique domain for their addon, this domain will be used in the [configuration](/core/configuration/) 
+file. Python requirements can be specified as list, either by name optionally with an exact version specifier.
+
+| identifier | required | description |
+| ---------- | -------- | ----------- |
+| domain | yes | unique identifier of the addon |
+| name | yes | short description what the addon can be used for. |
+| requirements | yes | python requirements to install before the addon setup |
+| type | no | define the type of the addon: image, storage |
+| core | no | min. version of the core system. |
 
 !!! Hint
     The **core** version is not used yet. It will keep track of the required core version for backward compatibility.
 
+#### example addon
 ```json
 {
-  "domain": "unique_addon",
-  "name": "This is my fancy addon",
+  "domain": "unique_image_addon",
+  "name": "This is an image processing addon",
   "requirements": [
     "exif==1.0.4",
     "torch"
   ],
+  "type": "image",
   "core": "0.1.0"
 }
 ```

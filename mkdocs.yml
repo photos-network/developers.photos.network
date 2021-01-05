@@ -39,11 +39,13 @@ strict: true
 # Navigation
 nav:
   - 'Home': 'index.md'
-#  - 'Supervisor': 'supervisor/index.md'
+  - 'Getting started':
+      - 'Overview': 'overview.md'
   - 'Core':
       - 'Getting started': 'core/index.md'
       - 'Structure': 'core/structure.md'
       - 'Environment': 'core/env.md'
+      - 'Configuration': 'core/configuration.md'
   - 'Addons':
       - 'Create an addon': 'addons/index.md'
       - 'api': 'addons/api.md'
@@ -51,11 +53,19 @@ nav:
       - 'nextcloud': 'addons/nextcloud.md'
       - 'places365': 'addons/places365.md'
       - 'sqlite': 'addons/sqlite.md'
-  - 'Frontend': 'frontend/index.md'
+  - 'Frontend':
+      - 'Getting started': 'frontend/index.md'
+      - 'Grid': 'frontend/grid.md'
+      - 'Albums': 'frontend/albums.md'
+      - 'Map': 'frontend/map.md'
+      - 'Search': 'frontend/search.md'
+      - 'Details': 'frontend/details.md'
+      - 'Share': 'frontend/share.md'
   - 'Mobile':
       - 'General': 'mobile/index.md'
       - 'Android': 'mobile/android/index.md'
       - 'iOS': 'mobile/ios/index.md'
+  - 'Supervisor': 'supervisor/index.md'
   - 'FAQ': 'faq.md'
 
 # Theme
