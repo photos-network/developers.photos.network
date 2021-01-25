@@ -23,13 +23,13 @@ With an additional `requires_auth` property can be defined if the resource can b
 ### Methods
 Each view can offer multiple methods to the given `url` property.
 
-an async get method will handle `GET` requests
+an async `get` method will handle `GET` requests
 ```python
 async def get(self, core, request) -> web.Response:
     return self.json_message("respond with a json message.")
 ```
 
-while an async post method will handle `POST` requests and so on.
+while an async `post` method will handle `POST` requests and so on.
 ```python
 async def post(self, request, entity_id) -> web.Response:
     return self.json_message("entity has been created.")
@@ -45,7 +45,5 @@ Return a simple json
 
 Return a data as json
 ```python
-    myDataClass = MyDataClass(foo, 1.3, bar)
-    return self.json(myDataClass)
+    return self.json({"foo":"bar"})
 ```
-

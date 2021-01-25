@@ -45,6 +45,7 @@ nav:
       - 'Getting started': 'core/index.md'
       - 'Structure': 'core/structure.md'
       - 'Environment': 'core/env.md'
+      - 'Authentication': 'core/authentication.md'
       - 'Configuration': 'core/configuration.md'
   - 'Addons':
       - 'Create an addon': 'addons/index.md'
