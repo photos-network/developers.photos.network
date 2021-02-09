@@ -3,10 +3,10 @@ hide:
 - toc
 ---
 # Authentication
-The core system is using IndieAuth[^1] for authentication.
+The core system is using OAuth 2.0[^1] for authentication and acting as authorization server.
 
-- restrict third-party apps to a limited subset of resources
-- revoke access for a particular third party without changing credentials
+- restrict third-party apps to a limited subset of resources.
+- revoke access for a particular third-party without changing credentials
 
 
 ## Scopes
@@ -28,7 +28,6 @@ The list of available scopes may change.
 | admin.users:write | Grant the user to manage users on the system. |
 
 
-*[IndieAuth]: IndieAuth builds upon the OAuth 2.0 
 
 [^1]: OAuth specification can be found here: [RFC6749](https://tools.ietf.org/html/rfc6749)
 [^2]: This is a default scope in OAuth 2.0

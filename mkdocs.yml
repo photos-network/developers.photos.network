@@ -46,6 +46,8 @@ nav:
       - 'Structure': 'core/structure.md'
       - 'Environment': 'core/env.md'
       - 'Authentication': 'core/authentication.md'
+      - 'Authorization flow': 'core/authentication_flow.md'
+      - 'Authorization': 'core/authorization.md'
       - 'Configuration': 'core/configuration.md'
   - 'Addons':
       - 'Create an addon': 'addons/index.md'
