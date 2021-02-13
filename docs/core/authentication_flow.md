@@ -50,12 +50,12 @@ access granted
 
 
 ## [Access Token Request](https://tools.ietf.org/html/rfc6749#section-4.1.3)
-> The client (*Frontend*) requests an access token  from the authorization server's token endpoint by including the authorization code
+> The client (*Frontend*) requests an access token from the authorization server's token endpoint by including the authorization code
 
 ``` http
 POST /oauth/token HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
-client_id=<CLIENT_ID>&client_secret=<CLIENT_SECRET>&grant_type=authorization_code&code=zuzuRerfdg543ljf023&
+client_id=<CLIENT_ID>client_secret=<CLIENT_SECRET>&grant_type=authorization_code&code=zuzuRerfdg543ljf023&
 ```
 
 ### [Access Token Response](https://tools.ietf.org/html/rfc6749#section-4.1.4)
@@ -63,14 +63,27 @@ client_id=<CLIENT_ID>&client_secret=<CLIENT_SECRET>&grant_type=authorization_cod
 
 ``` json
 {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTMyMzM4Mjh9.8U4oXtAHEkYgZldFMduANu-ryhTN5RX69XslPzU7pnQ",
   "token_type": "Bearer",
   "expires_in": 3600,
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+  "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTMyMzA4ODN9.4kFQD33F7-xQPUWSM9IxsDYqv30zAEa7WS7jpk8NtFU"
 }
 ```
 
-## Use access token
-GET /api/photo
-Authorization: Bearer lkmlsdJsdf034fksfere23L
+## [Refreshing an Access Token](https://tools.ietf.org/html/rfc6749#section-6)
+> The client (*Frontend*) makes a refresh request to the authorization server's token endpoint
 
+**Hint:** grant_type have to be `refresh_token`
+
+``` http
+POST /oauth/token HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+client_id=<CLIENT_ID>&client_secret=<CLIENT_SECRET>&grant_type=refresh_token&code=zuzuRerfdg543ljf023&
+refresh_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTMyMzA4ODN9.4kFQD33F7-xQPUWSM9IxsDYqv30zAEa7WS7jpk8NtFU
+```
+
+## Access protected endpoints
+``` http
+GET /api/photo HTTP/1.1
+Authorization: Bearer <ACCESS_TOKEN>
+```
