@@ -540,8 +540,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#use-access-token" class="md-nav__link">
-    Use access token
+  <a href="#refreshing-an-access-token" class="md-nav__link">
+    Refreshing an Access Token
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access-protected-endpoints" class="md-nav__link">
+    Access protected endpoints
   </a>
   
 </li>
@@ -971,8 +978,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#use-access-token" class="md-nav__link">
-    Use access token
+  <a href="#refreshing-an-access-token" class="md-nav__link">
+    Refreshing an Access Token
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access-protected-endpoints" class="md-nav__link">
+    Access protected endpoints
   </a>
   
 </li>
@@ -1056,13 +1070,13 @@ client_id=CLIENT_ID&amp;redirect_uri=http://frontend.photos.network&amp;scope=&l
 <hr />
 <h2 id="access-token-request"><a href="https://tools.ietf.org/html/rfc6749#section-4.1.3">Access Token Request</a></h2>
 <blockquote>
-<p>The client (<em>Frontend</em>) requests an access token  from the authorization server's token endpoint by including the authorization code</p>
+<p>The client (<em>Frontend</em>) requests an access token from the authorization server's token endpoint by including the authorization code</p>
 </blockquote>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/oauth/token</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
-<span class="err">client_id=&lt;CLIENT_ID&gt;&amp;client_secret=&lt;CLIENT_SECRET&gt;&amp;grant_type=authorization_code&amp;code=zuzuRerfdg543ljf023&amp;</span>
+<span class="err">client_id=&lt;CLIENT_ID&gt;client_secret=&lt;CLIENT_SECRET&gt;&amp;grant_type=authorization_code&amp;code=zuzuRerfdg543ljf023&amp;</span>
 </code></pre></div>
 </td></tr></table>
 <h3 id="access-token-response"><a href="https://tools.ietf.org/html/rfc6749#section-4.1.4">Access Token Response</a></h3>
@@ -1075,16 +1089,33 @@ client_id=CLIENT_ID&amp;redirect_uri=http://frontend.photos.network&amp;scope=&l
 4
 5
 6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
-  <span class="nt">&quot;access_token&quot;</span><span class="p">:</span> <span class="s2">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;access_token&quot;</span><span class="p">:</span> <span class="s2">&quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTMyMzM4Mjh9.8U4oXtAHEkYgZldFMduANu-ryhTN5RX69XslPzU7pnQ&quot;</span><span class="p">,</span>
   <span class="nt">&quot;token_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer&quot;</span><span class="p">,</span>
   <span class="nt">&quot;expires_in&quot;</span><span class="p">:</span> <span class="mi">3600</span><span class="p">,</span>
-  <span class="nt">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="s2">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c&quot;</span>
+  <span class="nt">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="s2">&quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTMyMzA4ODN9.4kFQD33F7-xQPUWSM9IxsDYqv30zAEa7WS7jpk8NtFU&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
-<h2 id="use-access-token">Use access token</h2>
-<p>GET /api/photo
-Authorization: Bearer lkmlsdJsdf034fksfere23L</p>
+<h2 id="refreshing-an-access-token"><a href="https://tools.ietf.org/html/rfc6749#section-6">Refreshing an Access Token</a></h2>
+<blockquote>
+<p>The client (<em>Frontend</em>) makes a refresh request to the authorization server's token endpoint</p>
+</blockquote>
+<p><strong>Hint:</strong> grant_type have to be <code>refresh_token</code></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/oauth/token</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+<span class="err">client_id=&lt;CLIENT_ID&gt;&amp;client_secret=&lt;CLIENT_SECRET&gt;&amp;grant_type=refresh_token&amp;code=zuzuRerfdg543ljf023&amp;</span>
+refresh_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTMyMzA4ODN9.4kFQD33F7-xQPUWSM9IxsDYqv30zAEa7WS7jpk8NtFU
+</code></pre></div>
+</td></tr></table>
+<h2 id="access-protected-endpoints">Access protected endpoints</h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nf">GET</span> <span class="nn">/api/photo</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;ACCESS_TOKEN&gt;</span>
+</code></pre></div>
+</td></tr></table>
                 
               
               
