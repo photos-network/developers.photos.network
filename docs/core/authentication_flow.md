@@ -8,7 +8,7 @@ GET /oauth/authorize HTTP/1.1
 Host: core.photos.network
 Accept-Language: en-US,en;q=0.8
 
-client_id=CLIENT_ID&redirect_uri=http://frontend.photos.network&scope=<SCOPES>&response_type=code&response_mode=query&nonce=<NONCE>
+client_id=CLIENT_ID&redirect_uri=http://frontend.photos.network&scope=<SCOPES>&response_type=code&response_mode=query&state=<NONCE>
 ```
 
 > The authorization server will show a login dialog with a list of requested scopes.
