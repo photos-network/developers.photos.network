@@ -1,6 +1,7 @@
 site_name: Developers
 site_url: https://developers.photos.network
 repo_url: https://github.com/photos-network/developers.photos.network
+edit_uri: edit/development/docs/
 repo_name: photos.network
 site_description: "https://photos.network is an open source project for self hosted photo management."
 site_author: "Stürmer, Benjamin"
