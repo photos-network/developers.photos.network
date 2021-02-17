@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Photos.network",
+      "type": "python",
+      "request": "launch",
+      "module": "mkdocs",
+      "args": ["serve"],
+      "console": "integratedTerminal"
+    }
+  ]
+}

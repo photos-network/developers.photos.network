@@ -1,0 +1,11 @@
+{
+  "name": "Photos.network Developer Documentation",
+  "image": "squidfunk/mkdocs-material",
+  "extensions": ["ms-python.python"],
+  "settings": {
+    "python.pythonPath": "/usr/local/bin/python",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true
+  }
+}
