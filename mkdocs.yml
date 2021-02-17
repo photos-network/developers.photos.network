@@ -39,38 +39,38 @@ strict: true
 
 # Navigation
 nav:
-  - 'Home': 'index.md'
-  - 'Getting started':
-      - 'Overview': 'overview.md'
-  - 'Core':
-      - 'Getting started': 'core/index.md'
-      - 'Structure': 'core/structure.md'
-      - 'Environment': 'core/env.md'
-      - 'Authentication': 'core/authentication.md'
-      - 'Authorization flow': 'core/authentication_flow.md'
-      - 'Authorization': 'core/authorization.md'
-      - 'Configuration': 'core/configuration.md'
-  - 'Addons':
-      - 'Create an addon': 'addons/index.md'
-      - 'api': 'addons/api.md'
-      - 'metadata': 'addons/metadata.md'
-      - 'nextcloud': 'addons/nextcloud.md'
-      - 'places365': 'addons/places365.md'
-      - 'sqlite': 'addons/sqlite.md'
-  - 'Frontend':
-      - 'Getting started': 'frontend/index.md'
-      - 'Grid': 'frontend/grid.md'
-      - 'Albums': 'frontend/albums.md'
-      - 'Map': 'frontend/map.md'
-      - 'Search': 'frontend/search.md'
-      - 'Details': 'frontend/details.md'
-      - 'Share': 'frontend/share.md'
-  - 'Mobile':
-      - 'General': 'mobile/index.md'
-      - 'Android': 'mobile/android/index.md'
-      - 'iOS': 'mobile/ios/index.md'
-  - 'Supervisor': 'supervisor/index.md'
-  - 'FAQ': 'faq.md'
+  - "Home": "index.md"
+  - "Getting started":
+      - "Overview": "overview.md"
+  - "Core":
+      - "Getting started": "core/index.md"
+      - "Structure": "core/structure.md"
+      - "Environment": "core/env.md"
+      - "Authentication": "core/authentication.md"
+      - "Authorization flow": "core/authentication_flow.md"
+      - "Authorization": "core/authorization.md"
+      - "Configuration": "core/configuration.md"
+  - "Addons":
+      - "Create an addon": "addons/index.md"
+      - "api": "addons/api.md"
+      - "metadata": "addons/metadata.md"
+      - "nextcloud": "addons/nextcloud.md"
+      - "places365": "addons/places365.md"
+      - "sqlite": "addons/sqlite.md"
+  - "Frontend":
+      - "Getting started": "frontend/index.md"
+      - "Grid": "frontend/grid.md"
+      - "Albums": "frontend/albums.md"
+      - "Map": "frontend/map.md"
+      - "Search": "frontend/search.md"
+      - "Details": "frontend/details.md"
+      - "Share": "frontend/share.md"
+  - "Mobile":
+      - "General": "mobile/index.md"
+      - "Android": "mobile/android/index.md"
+      - "iOS": "mobile/ios/index.md"
+  - "Supervisor": "supervisor/index.md"
+  - "FAQ": "faq.md"
 
 # Theme
 theme:
