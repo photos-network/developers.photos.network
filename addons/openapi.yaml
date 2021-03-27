@@ -10,8 +10,8 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
 servers:
-- url: https://127.0.0.1:7777/v1
-- url: http://127.0.0.1:7777/v1
+- url: https://127.0.0.1:7777
+- url: http://127.0.0.1:7777
 tags:
 - name: status
   description: Status of the api
@@ -43,12 +43,26 @@ paths:
       responses:
         200:
           description: Indicates the current status of the api
-  /photos:
+  /v1/photos:
     get:
       tags:
       - photos
       summary: List all photos for current user
       description: Returns a list of photos
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: The number of items to skip before starting to collect the result
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+          description: Limit after which the results are skipped
       responses:
         200:
           description: successful operation
@@ -59,7 +73,7 @@ paths:
       security:
       - core_auth:
         - library:read
-  /photo/{photoId}:
+  /v1/photo/{photoId}:
     get:
       tags:
       - photos
@@ -144,7 +158,7 @@ paths:
     #   - core_auth:
     #     - library:write
     #     - library:read
-  /file/{fileId}:
+  /v1/file/{fileId}:
     get:
       tags:
       - photos
@@ -283,8 +297,8 @@ components:
       type: oauth2
       flows:
         authorizationCode:
-          authorizationUrl: http://127.0.0.1:7777/oauth/authorize
-          tokenUrl: http://127.0.0.1:7777/oauth/token
+          authorizationUrl: https://127.0.0.1:7777/oauth/authorize
+          tokenUrl: https://127.0.0.1:7777/oauth/token
           scopes:
             openid:   access the users public profile e.g. username
             profile:   access the users personal profile information e.g. firstname, lastname
