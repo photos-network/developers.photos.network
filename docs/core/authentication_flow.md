@@ -26,6 +26,7 @@ client_id=CLIENT_ID&redirect_uri=http://frontend.photos.network&scope=<SCOPES>&r
 ``` http
 POST /oauth/authorize HTTP/1.1
 Host: core.photos.network
+
 uname=test&password=secret
 ```
 
@@ -55,6 +56,7 @@ access granted
 ``` http
 POST /oauth/token HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
+
 client_id=<CLIENT_ID>client_secret=<CLIENT_SECRET>&grant_type=authorization_code&code=zuzuRerfdg543ljf023&
 ```
 
@@ -78,6 +80,7 @@ client_id=<CLIENT_ID>client_secret=<CLIENT_SECRET>&grant_type=authorization_code
 ``` http
 POST /oauth/token HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
+
 client_id=<CLIENT_ID>&client_secret=<CLIENT_SECRET>&grant_type=refresh_token&code=zuzuRerfdg543ljf023&
 refresh_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTMyMzA4ODN9.4kFQD33F7-xQPUWSM9IxsDYqv30zAEa7WS7jpk8NtFU
 ```

@@ -7,6 +7,9 @@ site_description: "https://photos.network is an open source project for self hos
 site_author: "Stürmer, Benjamin"
 copyright: 'Copyright &copy; 2020 <a href="https://photos.network">Photos network developers</a>'
 
+plugins:
+  - render_swagger
+
 extra_css:
   - _css/extra.css
 
@@ -25,6 +28,7 @@ markdown_extensions:
   - pymdownx.highlight:
       linenums: true
   - admonition
+  - attr_list
   - pymdownx.details
   - pymdownx.superfences
   - abbr

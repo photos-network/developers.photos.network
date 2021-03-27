@@ -1,0 +1,300 @@
+openapi: 3.0.1
+info:
+  title: Photos.network
+  description: "Photos.network core API.  This is the default api implementation you can use with your local photos.network instance. If you need more endpoints or different behaviour, you can add or change it in your local `api addon` in the folder `core/addons/api`"
+  termsOfService: "https://photos.network/privacy/"
+  contact:
+    email: info@photos.network
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://127.0.0.1:7777/v1
+- url: http://127.0.0.1:7777/v1
+tags:
+- name: status
+  description: Status of the api
+- name: photos
+  description: Access to users photos
+# - name: user
+#   description: Operations about user
+paths:
+  /:
+    get:
+      tags:
+      - status
+      summary: Check the status of the API.
+      responses:
+        200:
+          description: Indicates the current status of the api
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: API running.
+    head:
+      tags:
+      - status
+      summary: Check the status of the API.
+      responses:
+        200:
+          description: Indicates the current status of the api
+  /photos:
+    get:
+      tags:
+      - photos
+      summary: List all photos for current user
+      description: Returns a list of photos
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhotoList'
+      security:
+      - core_auth:
+        - library:read
+  /photo/{photoId}:
+    get:
+      tags:
+      - photos
+      summary: Show detailed information for photo ID
+      description: Returns a detailed information for a single photo
+      parameters:
+      - name: photoId
+        in: path
+        description: ID of photo to return
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhotoDetails'
+        400:
+          description: Invalid ID supplied
+          content: {}
+        404:
+          description: Photo not found
+          content: {}
+      security:
+      - core_auth:
+        - library:read
+    # post:
+    #   tags:
+    #   - photos
+    #   summary: Updates at least one property of the photo  ID
+    #   parameters:
+    #   - name: photoId
+    #     in: path
+    #     description: ID of the photo that needs to be updated
+    #     required: true
+    #     schema:
+    #       type: string
+    #       format: uuis
+    #   requestBody:
+    #     content:
+    #       application/x-www-form-urlencoded:
+    #         schema:
+    #           properties:
+    #             name:
+    #               type: string
+    #               description: Updated name of the pet
+    #             status:
+    #               type: string
+    #               description: Updated status of the pet
+    #   responses:
+    #     405:
+    #       description: Invalid input
+    #       content: {}
+    #   security:
+    #   - core_auth:
+    #     - library:write
+    #     - library:read
+    # delete:
+    #   tags:
+    #   - photos
+    #   summary: Deletes a pet
+    #   operationId: deletePet
+    #   parameters:
+    #   - name: photoId
+    #     in: path
+    #     description: Pet id to delete
+    #     required: true
+    #     schema:
+    #       type: integer
+    #       format: int64
+    #   responses:
+    #     400:
+    #       description: Invalid ID supplied
+    #       content: {}
+    #     404:
+    #       description: Pet not found
+    #       content: {}
+    #   security:
+    #   - core_auth:
+    #     - library:write
+    #     - library:read
+  /file/{fileId}:
+    get:
+      tags:
+      - photos
+      summary: request a specifig file
+      parameters:
+      - name: fileId
+        in: path
+        description: ID of file to load
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        200:
+          description: successful operation
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: byte
+      security:
+      - core_auth:
+        - library:read
+  # /file:
+  #   post:
+  #     tags:
+  #     - photos
+  #     summary: uploads an image
+  #     requestBody:
+  #       content:
+  #         multipart/form-data:
+  #           schema:
+  #             properties:
+  #               additionalMetadata:
+  #                 type: string
+  #                 description: Additional data to pass to server
+  #               file:
+  #                 type: string
+  #                 description: file to upload
+  #                 format: binary
+  #     responses:
+  #       200:
+  #         description: successful operation
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: '#/components/schemas/Photo'
+  #     security:
+  #     - core_auth:
+  #       - library:write
+components:
+  schemas:
+    PhotoList:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int32
+        limit:
+          type: integer
+          format: int32
+          default: 50
+        size:
+          type: integer
+          format: int32
+          default: 10
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+    Photo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          default: filename.ext
+        image_url:
+          type: string
+          format: uri
+    PhotoDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          default: filename.ext
+        created_at:
+          type: string
+          format: date-time
+        details:
+          $ref: '#/components/schemas/ExifInformation'
+        tags:
+          type: array
+          items:
+            type: string
+            default: landscape
+        location:
+          $ref: '#/components/schemas/Location'
+        image_url:
+          type: string
+          format: uri
+    Location:
+      type: object
+      properties:
+        latitude:
+          type: number
+          default: 20.000000
+        longitude:
+          type: number
+          default: 30.000000
+        altitude:
+          type: number
+          default: 0.0
+    ExifInformation:
+      type: object
+      properties:
+        camera:
+          type: string
+        lens:
+          type: string
+        focal_length:
+          type: string
+        iso:
+          type: string
+        shutter_speed:
+          type: string
+        aperture:
+          type: string
+  securitySchemes:
+    core_auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: http://127.0.0.1:7777/oauth/authorize
+          tokenUrl: http://127.0.0.1:7777/oauth/token
+          scopes:
+            openid2:   access the users public profile e.g. username
+            profile2:   access the users personal profile information e.g. firstname, lastname
+            email2:   access the users associated email address.
+            phone2:   access the users associated phone number.
+            library:read:   Read only Grant the user to list all photos owned by the user.
+            library:append:   Limited write access Grant the user to add new photos, create new albums.
+            library:edit:   Grant the user to edit photos owned by the user.
+            library:write:   Grant the user to add and edit photos, albums, tags.
+            library:share:   Grant the user to create new shares (photos/videos/albums).
+            admin.users:read:   Grant the user to list users on the system.
+            admin.users:invite:   Grant the user to invite new users to the system.
+            admin.users:write:   Grant the user to manage users on the system.

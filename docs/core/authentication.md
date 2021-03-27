@@ -18,14 +18,14 @@ The list of available scopes may change.
 | profile[^2] | access the users personal profile information e.g.: firstname, lastname |
 | email[^2] | access the users associated email address. |
 | phone[^2] | access the users associated phone number. |
-| library:read | *Read only* Grant the user to list all photos owned by the user. |
-| library:append | *Limited write access* Grant the user to add new photos, create new albums. |
-| library:edit | Grant the user to edit photos owned by the user. |
-| library:write | Grant the user to add and edit photos, albums, tags. |
-| library:share | Grant the user to create new shares (photos/videos/albums). |
-| admin.users:read | Grant the user to list users on the system. |
-| admin.users:invite | Grant the user to invite new users to the system. |
-| admin.users:write | Grant the user to manage users on the system. |
+| library:read | *Read only* access the list of all photos owned by the user. |
+| library:append | *Limited write access* access to add new photos, create new albums. |
+| library:edit | access to edit photos owned by the user. |
+| library:write | access to add and edit photos, albums, tags. |
+| library:share | access to create new shares (photos/videos/albums). |
+| admin.users:read | access to list users on the system. |
+| admin.users:invite | access to invite new users to the system. |
+| admin.users:write | access to manage users on the system. |
 
 
 
