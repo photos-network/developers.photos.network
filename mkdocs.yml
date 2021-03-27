@@ -53,6 +53,7 @@ nav:
       - "Authentication": "core/authentication.md"
       - "Authorization flow": "core/authentication_flow.md"
       - "Authorization": "core/authorization.md"
+      - "User management": "core/user_management.md"
       - "Configuration": "core/configuration.md"
   - "Addons":
       - "Create an addon": "addons/index.md"
