@@ -286,10 +286,10 @@ components:
           authorizationUrl: http://127.0.0.1:7777/oauth/authorize
           tokenUrl: http://127.0.0.1:7777/oauth/token
           scopes:
-            openid2:   access the users public profile e.g. username
-            profile2:   access the users personal profile information e.g. firstname, lastname
-            email2:   access the users associated email address.
-            phone2:   access the users associated phone number.
+            openid:   access the users public profile e.g. username
+            profile:   access the users personal profile information e.g. firstname, lastname
+            email:   access the users associated email address.
+            phone:   access the users associated phone number.
             library:read:   Read only Grant the user to list all photos owned by the user.
             library:append:   Limited write access Grant the user to add new photos, create new albums.
             library:edit:   Grant the user to edit photos owned by the user.
