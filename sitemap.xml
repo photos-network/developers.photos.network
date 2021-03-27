@@ -1,111 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://developers.photos.network/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/overview/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/core/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/core/structure/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/core/env/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/core/authentication/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/core/authentication_flow/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/core/authorization/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://developers.photos.network/core/user_management/</loc>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/core/configuration/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/addons/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/addons/api/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/addons/metadata/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/addons/nextcloud/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/addons/places365/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/addons/sqlite/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/frontend/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/frontend/grid/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/frontend/albums/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/frontend/map/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/frontend/search/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/frontend/details/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/frontend/share/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/mobile/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/mobile/android/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/mobile/ios/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/supervisor/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://developers.photos.network/faq/</loc>
-     <lastmod>2021-02-17</lastmod>
+     <lastmod>2021-03-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

@@ -13,14 +13,14 @@
         <meta name="author" content="Stürmer, Benjamin">
       
       
-        <link rel="canonical" href="https://developers.photos.network/mobile/ios/">
+        <link rel="canonical" href="https://developers.photos.network/core/user_management/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.6">
     
     
       
-        <title>iOS - Developers</title>
+        <title>User management - Developers</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ios" class="md-skip">
+        <a href="#user-management" class="md-skip">
           Skip to content
         </a>
       
@@ -95,7 +95,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              iOS
+              User management
             
           </span>
         </div>
@@ -162,13 +162,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../core/" class="md-tabs__link">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
         Core
       </a>
     </li>
@@ -210,15 +212,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../" class="md-tabs__link md-tabs__link--active">
+      <a href="../../mobile/" class="md-tabs__link">
         Mobile
       </a>
     </li>
@@ -356,12 +356,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
       <label class="md-nav__link" for="__nav_3">
         Core
@@ -379,7 +381,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         Getting started
       </a>
     </li>
@@ -391,7 +393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/structure/" class="md-nav__link">
+      <a href="../structure/" class="md-nav__link">
         Structure
       </a>
     </li>
@@ -403,7 +405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/env/" class="md-nav__link">
+      <a href="../env/" class="md-nav__link">
         Environment
       </a>
     </li>
@@ -415,7 +417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/authentication/" class="md-nav__link">
+      <a href="../authentication/" class="md-nav__link">
         Authentication
       </a>
     </li>
@@ -427,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/authentication_flow/" class="md-nav__link">
+      <a href="../authentication_flow/" class="md-nav__link">
         Authorization flow
       </a>
     </li>
@@ -439,7 +441,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/authorization/" class="md-nav__link">
+      <a href="../authorization/" class="md-nav__link">
         Authorization
       </a>
     </li>
@@ -449,11 +451,109 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../core/user_management/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          User management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         User management
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-update-user" class="md-nav__link">
+    Create / Update User
+  </a>
+  
+    <nav class="md-nav" aria-label="Create / Update User">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-user" class="md-nav__link">
+    Get User
+  </a>
+  
+    <nav class="md-nav" aria-label="Get User">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#response_1" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-user" class="md-nav__link">
+    Delete User
+  </a>
+  
+    <nav class="md-nav" aria-label="Delete User">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#response_2" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#confirmation" class="md-nav__link">
+    Confirmation
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -463,7 +563,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/configuration/" class="md-nav__link">
+      <a href="../configuration/" class="md-nav__link">
         Configuration
       </a>
     </li>
@@ -698,14 +798,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
       
       <label class="md-nav__link" for="__nav_6">
         Mobile
@@ -723,7 +821,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../mobile/" class="md-nav__link">
         General
       </a>
     </li>
@@ -735,7 +833,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../android/" class="md-nav__link">
+      <a href="../../mobile/android/" class="md-nav__link">
         Android
       </a>
     </li>
@@ -745,20 +843,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../mobile/ios/" class="md-nav__link">
         iOS
       </a>
-      
     </li>
   
 
@@ -817,6 +906,81 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-update-user" class="md-nav__link">
+    Create / Update User
+  </a>
+  
+    <nav class="md-nav" aria-label="Create / Update User">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-user" class="md-nav__link">
+    Get User
+  </a>
+  
+    <nav class="md-nav" aria-label="Get User">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#response_1" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-user" class="md-nav__link">
+    Delete User
+  </a>
+  
+    <nav class="md-nav" aria-label="Delete User">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#response_2" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#confirmation" class="md-nav__link">
+    Confirmation
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -827,13 +991,114 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/photos-network/developers.photos.network/edit/development/docs/mobile/ios/index.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/photos-network/developers.photos.network/edit/development/docs/core/user_management.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="ios">iOS</h1>
-<p>iOS specific development details.</p>
+                <h1 id="user-management">User Management</h1>
+<p>This user management does only provide some basic endpoints.</p>
+<h2 id="create-update-user">Create / Update User</h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nf">PUT</span> <span class="nn">/users/{userId}</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">core.photos.network</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;ACCESS_TOKEN&gt;</span>
+
+{
+  &quot;properties.email&quot;: &quot;max.mustermann@photos.network&quot;,
+  &quot;properties.firstName&quot;: &quot;Max&quot;,
+  &quot;properties.lastName&quot;: &quot;Mustermann&quot;,
+  &quot;properties.password&quot;: &quot;myS3curePa$$wor!&quot;
+}
+</code></pre></div>
+</td></tr></table>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>properties.email</code></td>
+<td>Must not be empty and must be unique within the service instance.</td>
+</tr>
+<tr>
+<td><code>properties.firstName</code></td>
+<td>First name.</td>
+</tr>
+<tr>
+<td><code>properties.lastName</code></td>
+<td>Last name.</td>
+</tr>
+<tr>
+<td><code>properties.password</code></td>
+<td>User Password. If no value is provided, a default password is generated.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="response">Response</h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="err">200 OK - User updated</span>
+<span class="err">201 CREATED - User created</span>
+</code></pre></div>
+</td></tr></table>
+<h2 id="get-user">Get User</h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nf">GET</span> <span class="nn">/users/{userId}</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">core.photos.network</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;ACCESS_TOKEN&gt;</span>
+</code></pre></div>
+</td></tr></table>
+<h4 id="response_1">Response</h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="err">{</span>
+<span class="err">  &quot;properties.email&quot;: &quot;max.mustermann@photos.network&quot;,</span>
+<span class="err">  &quot;properties.firstName&quot;: &quot;Max&quot;,</span>
+<span class="err">  &quot;properties.lastName&quot;: &quot;Mustermann&quot;,</span>
+<span class="err">  &quot;properties.registrationDate&quot;: &quot;yyyy-MM-ddTHH:mm:ssZ&quot;,</span>
+<span class="err">  &quot;properties.lastLogin&quot;: &quot;yyyy-MM-ddTHH:mm:ssZ&quot;</span>
+<span class="err">}</span>
+</code></pre></div>
+</td></tr></table>
+<h2 id="delete-user">Delete User</h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nf">DELETE</span> <span class="nn">/users/{userId}</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">core.photos.network</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;ACCESS_TOKEN&gt;</span>
+</code></pre></div>
+</td></tr></table>
+<h4 id="response_2">Response</h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="err">200 OK - The user were successfully deleted.</span>
+</code></pre></div>
+</td></tr></table>
+<h2 id="confirmation">Confirmation</h2>
+<p>Each password change needs to be confirmed by the user.</p>
+<div class="admonition hint">
+<p class="admonition-title">Not implemented yet?</p>
+<p>This endpoint neither the requirement is implemented yet.</p>
+</div>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nf">GET</span> <span class="nn">/users/{userId}/confirmations/{confirmationCode}</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">core.photos.network</span>
+</code></pre></div>
+</td></tr></table>
                 
               
               
