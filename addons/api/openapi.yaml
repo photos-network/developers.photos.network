@@ -1,24 +1,21 @@
 openapi: 3.0.1
 info:
   title: Photos.network
-  description: "Photos.network core API.  This is the default api implementation you can use with your local photos.network instance. If you need more endpoints or different behaviour, you can add or change it in your local `api addon` in the folder `core/addons/api`"
-  termsOfService: "https://photos.network/privacy/"
-  contact:
-    email: info@photos.network
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.0
+  description: "Photos.network core API. <br /><br />
+  Default API implementation of your local photos.network instance.<br />
+  Implementation details can be found in the `api addon` in the `core/addons/api` folder."
+  version: 0.3.29
 servers:
-- url: https://127.0.0.1:7777
 - url: http://127.0.0.1:7777
 tags:
 - name: status
   description: Status of the api
 - name: photos
   description: Access to users photos
-# - name: user
-#   description: Operations about user
+- name: user
+  description: Operations for user management
+- name: storage
+  description: Operations for folders and files
 paths:
   /:
     get:
@@ -71,7 +68,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PhotoList'
       security:
-      - core_auth:
+      - OAuth2:
         - library:read
   /v1/photo/{photoId}:
     get:
@@ -101,7 +98,7 @@ paths:
           description: Photo not found
           content: {}
       security:
-      - core_auth:
+      - OAuth2:
         - library:read
     # post:
     #   tags:
@@ -131,7 +128,7 @@ paths:
     #       description: Invalid input
     #       content: {}
     #   security:
-    #   - core_auth:
+    #   - OAuth2:
     #     - library:write
     #     - library:read
     # delete:
@@ -155,13 +152,236 @@ paths:
     #       description: Pet not found
     #       content: {}
     #   security:
-    #   - core_auth:
+    #   - OAuth2:
     #     - library:write
     #     - library:read
+  /v1/users:
+    get:
+      tags:
+      - user
+      summary: Get a list of registered users
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+      security:
+      - OAuth2:
+        - admin.users:read
+  /v1/user/{userId}:
+    get:
+      tags:
+      - user
+      summary: Get user by user ID
+      parameters:
+      - name: userId
+        in: path
+        description: 'The user ID that needs to be fetched.'
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        404:
+          description: User not found
+          content: {}
+      security:
+      - OAuth2:
+        - openid
+        - profile
+        - email
+    patch:
+      tags:
+      - user
+      summary: Partial update to the current user
+      description: Update properties of the logged in user.
+      parameters:
+      - name: userId
+        in: path
+        description: user ID that need to be updated
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Updated user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        200:
+          description: successful operation
+        400:
+          description: Invalid data
+        404:
+          description: User not found
+      security:
+      - OAuth2:
+        - openid
+        - profile
+        - email
+    delete:
+      tags:
+      - user
+      summary: Delete user
+      description: Logged in user will be deleted permanently after deadline. 
+      parameters:
+      - name: userId
+        in: path
+        description: user ID that need to be marked as deleted
+        required: true
+        schema:
+          type: string
+      responses:
+        202:
+          description: User will be deleted soon.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deadline:
+                    type: string
+                    format: date-time
+        400:
+          description: Invalid username supplied
+          content: {}
+        404:
+          description: User not found
+          content: {}
+      security:
+      - OAuth2:
+        - openid
+        - profile
+        - email
+  /v1/user:
+    post:
+      tags:
+      - user
+      summary: Create a new User
+      requestBody:
+        description: Updated user object
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Account'
+        required: true
+      responses:
+        201:
+          description: successful operation
+        400:
+          description: Invalid user supplied
+      security:
+      - OAuth2:
+        - admin.users:write
+  /v1/directories:
+    get:
+      tags:
+        - storage
+      summary: get a list of available directories
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Directory'
+      security:
+      - OAuth2:
+        - library:write
+  /v1/directories/{directoryId}:
+    post:
+      tags:
+        - storage
+      summary: provision a directory to a specific user
+      parameters:
+      - name: directoryId
+        in: path
+        description: The directory ID to map to the current user.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        200:
+          description: successful operation
+        400:
+          description: failed operation
+      security:
+      - OAuth2:
+        - library:write
+    delete:
+      tags:
+        - storage
+      summary: abandon this directory from a specific user
+      parameters:
+      - name: directoryId
+        in: path
+        description: The directory ID to abandon from the current user.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        200:
+          description: successful operation
+      security:
+      - OAuth2:
+        - library:write
+  /v1/directories/{directoryId}/scan:
+    get:
+      tags:
+        - storage
+      summary: get the current scan status.
+      parameters:
+      - name: directoryId
+        in: path
+        description: The directory ID to check the status for.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        200:
+          description: successful operation
+      security:
+      - OAuth2:
+        - library:write
+    post:
+      tags:
+        - storage
+      summary: start a newdirectory scan.
+      parameters:
+      - name: directoryId
+        in: path
+        description: The directory ID to scan.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        200:
+          description: successful operation
+      security:
+      - OAuth2:
+        - library:write
   /v1/file/{fileId}:
     get:
       tags:
-      - photos
+      - storage
       summary: request a specifig file
       parameters:
       - name: fileId
@@ -180,35 +400,35 @@ paths:
                 type: string
                 format: byte
       security:
-      - core_auth:
+      - OAuth2:
         - library:read
-  # /file:
-  #   post:
-  #     tags:
-  #     - photos
-  #     summary: uploads an image
-  #     requestBody:
-  #       content:
-  #         multipart/form-data:
-  #           schema:
-  #             properties:
-  #               additionalMetadata:
-  #                 type: string
-  #                 description: Additional data to pass to server
-  #               file:
-  #                 type: string
-  #                 description: file to upload
-  #                 format: binary
-  #     responses:
-  #       200:
-  #         description: successful operation
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: '#/components/schemas/Photo'
-  #     security:
-  #     - core_auth:
-  #       - library:write
+  /v1/file:
+    post:
+      tags:
+      - storage
+      summary: uploads an image
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                additionalMetadata:
+                  type: string
+                  description: Additional data to pass to server
+                file:
+                  type: string
+                  description: file to upload
+                  format: binary
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Photo'
+      security:
+      - OAuth2:
+        - library:write
 components:
   schemas:
     PhotoList:
@@ -250,7 +470,13 @@ components:
         name:
           type: string
           default: filename.ext
+        owner:
+          type: string
+          default: lastname, firstname
         created_at:
+          type: string
+          format: date-time
+        modified_at:
           type: string
           format: date-time
         details:
@@ -292,8 +518,44 @@ components:
           type: string
         aperture:
           type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        lastname:
+          type: string
+        firstname:
+          type: string
+          format: password
+        lastSeen:
+          type: string
+          format: date-time
+    Account:
+      type: object
+      properties:
+        email:
+          type: string
+          format: uuid
+        lastname:
+          type: string
+        firstname:
+          type: string
+          format: password
+        password:
+          type: string
+          format: password
+    Directory:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
   securitySchemes:
-    core_auth:
+    OAuth2:
       type: oauth2
       flows:
         authorizationCode:
