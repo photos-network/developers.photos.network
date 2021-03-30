@@ -83,9 +83,9 @@ theme:
   custom_dir: overrides
 
   palette:
-    - scheme: preference
-      primary: blue
-      accent: pink
+    scheme: preference
+    primary: blue
+    accent: pink
 
   # disable font loading to comply GDPR
   font: false
