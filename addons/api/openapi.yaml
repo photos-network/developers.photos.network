@@ -285,99 +285,99 @@ paths:
       security:
       - OAuth2:
         - admin.users:write
-  /v1/directories:
-    get:
-      tags:
-        - storage
-      summary: get a list of available directories
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items: 
-                  $ref: '#/components/schemas/Directory'
-      security:
-      - OAuth2:
-        - library:write
-  /v1/directories/{directoryId}:
-    post:
-      tags:
-        - storage
-      summary: provision a directory to a specific user
-      parameters:
-      - name: directoryId
-        in: path
-        description: The directory ID to map to the current user.
-        required: true
-        schema:
-          type: string
-          format: uuid
-      responses:
-        200:
-          description: successful operation
-        400:
-          description: failed operation
-      security:
-      - OAuth2:
-        - library:write
-    delete:
-      tags:
-        - storage
-      summary: abandon this directory from a specific user
-      parameters:
-      - name: directoryId
-        in: path
-        description: The directory ID to abandon from the current user.
-        required: true
-        schema:
-          type: string
-          format: uuid
-      responses:
-        200:
-          description: successful operation
-      security:
-      - OAuth2:
-        - library:write
-  /v1/directories/{directoryId}/scan:
-    get:
-      tags:
-        - storage
-      summary: get the current scan status.
-      parameters:
-      - name: directoryId
-        in: path
-        description: The directory ID to check the status for.
-        required: true
-        schema:
-          type: string
-          format: uuid
-      responses:
-        200:
-          description: successful operation
-      security:
-      - OAuth2:
-        - library:write
-    post:
-      tags:
-        - storage
-      summary: start a newdirectory scan.
-      parameters:
-      - name: directoryId
-        in: path
-        description: The directory ID to scan.
-        required: true
-        schema:
-          type: string
-          format: uuid
-      responses:
-        200:
-          description: successful operation
-      security:
-      - OAuth2:
-        - library:write
+  # /v1/directories:
+  #   get:
+  #     tags:
+  #       - storage
+  #     summary: get a list of available directories
+  #     responses:
+  #       200:
+  #         description: successful operation
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: array
+  #               items: 
+  #                 $ref: '#/components/schemas/Directory'
+  #     security:
+  #     - OAuth2:
+  #       - library:write
+  # /v1/directories/{directoryId}:
+  #   post:
+  #     tags:
+  #       - storage
+  #     summary: provision a directory to a specific user
+  #     parameters:
+  #     - name: directoryId
+  #       in: path
+  #       description: The directory ID to map to the current user.
+  #       required: true
+  #       schema:
+  #         type: string
+  #         format: uuid
+  #     responses:
+  #       200:
+  #         description: successful operation
+  #       400:
+  #         description: failed operation
+  #     security:
+  #     - OAuth2:
+  #       - library:write
+  #   delete:
+  #     tags:
+  #       - storage
+  #     summary: abandon this directory from a specific user
+  #     parameters:
+  #     - name: directoryId
+  #       in: path
+  #       description: The directory ID to abandon from the current user.
+  #       required: true
+  #       schema:
+  #         type: string
+  #         format: uuid
+  #     responses:
+  #       200:
+  #         description: successful operation
+  #     security:
+  #     - OAuth2:
+  #       - library:write
+  # /v1/directories/{directoryId}/scan:
+  #   get:
+  #     tags:
+  #       - storage
+  #     summary: get the current scan status.
+  #     parameters:
+  #     - name: directoryId
+  #       in: path
+  #       description: The directory ID to check the status for.
+  #       required: true
+  #       schema:
+  #         type: string
+  #         format: uuid
+  #     responses:
+  #       200:
+  #         description: successful operation
+  #     security:
+  #     - OAuth2:
+  #       - library:write
+  #   post:
+  #     tags:
+  #       - storage
+  #     summary: start a newdirectory scan.
+  #     parameters:
+  #     - name: directoryId
+  #       in: path
+  #       description: The directory ID to scan.
+  #       required: true
+  #       schema:
+  #         type: string
+  #         format: uuid
+  #     responses:
+  #       200:
+  #         description: successful operation
+  #     security:
+  #     - OAuth2:
+  #       - library:write
   /v1/file/{fileId}:
     get:
       tags:
@@ -457,7 +457,7 @@ components:
           format: uuid
         name:
           type: string
-          default: filename.ext
+          example: filename.ext
         image_url:
           type: string
           format: uri
@@ -469,10 +469,10 @@ components:
           format: uuid
         name:
           type: string
-          default: filename.ext
+          example: filename.ext
         owner:
           type: string
-          default: lastname, firstname
+          example: lastname, firstname
         created_at:
           type: string
           format: date-time
@@ -485,7 +485,7 @@ components:
           type: array
           items:
             type: string
-            default: landscape
+            example: landscape
         location:
           $ref: '#/components/schemas/Location'
         image_url:
@@ -496,13 +496,13 @@ components:
       properties:
         latitude:
           type: number
-          default: 20.000000
+          example: 20.000000
         longitude:
           type: number
-          default: 30.000000
+          example: 30.000000
         altitude:
           type: number
-          default: 0.0
+          example: 0.0
     ExifInformation:
       type: object
       properties:
@@ -546,14 +546,14 @@ components:
         password:
           type: string
           format: password
-    Directory:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
+    # Directory:
+    #   type: object
+    #   properties:
+    #     id:
+    #       type: string
+    #       format: uuid
+    #     name:
+    #       type: string
   securitySchemes:
     OAuth2:
       type: oauth2
