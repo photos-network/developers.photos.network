@@ -266,6 +266,24 @@ paths:
         - profile
         - email
   /v1/user:
+    get:
+      tags:
+      - user
+      summary: Return detailed information of the current loggedin user
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+      security:
+      - OAuth2:
+        - openid
+        - profile
+        - email
     post:
       tags:
       - user
