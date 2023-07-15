@@ -5,7 +5,7 @@ hide:
 
 # Overview
 
-[Photos.network](https://photos.network) is a modulare system with heavy focus on customization.
+[Photos.network](https://photos.network) is build as a modulare system with heavy focus on customization.
 
 It is separated in multiple parts:
 

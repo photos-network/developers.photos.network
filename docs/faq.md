@@ -17,8 +17,8 @@ The list of [photo and video gallery projects](https://github.com/awesome-selfho
 Testing most of them ended in at least one of few complains:
 
  - sluggish performance
- - easy installation and setup
- - working with an existing folder structure
+ - hard installation and setup
+ - not working with an existing folder structure
  - supporting multiple TB of photos and videos
  - process RAW files
  - lack of control

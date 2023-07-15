@@ -5,10 +5,10 @@ hide:
 ---
 # Developer documentation
 
-This documentation is targeting developers for [Photos.network](https://photos.network) an open source project for self hosted photo management.
+This documentation is targeting developers for [Photos.network](https://photos.network) a free and open source, privacy first, self-hosted photo storage and sharing service.
 
 !!! hint "Not a developer?"
-    If you are interested in hosting your own photos.network at home, visit [our main website](https://photos.network)
+    If you are interested in hosting your own photos.network server, visit [our main website](https://photos.network)
 
 
 ### Code of conduct
