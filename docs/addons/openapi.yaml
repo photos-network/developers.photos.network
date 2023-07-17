@@ -1,21 +1,24 @@
 openapi: 3.0.1
 info:
   title: Photos.network
-  description: "Photos.network core API. <br /><br />
-  Default API implementation of your local photos.network instance.<br />
-  Implementation details can be found in the `api addon` in the `core/addons/api` folder."
-  version: 0.3.29
+  description:  >-
+    Official API endpoints for the [Photos.network](https://photos.network) server.
+    
+    [Photos.network](https://photos.network) is a free and open source, privacy first, self-hosted photo storage and sharing service.
+  version: 0.6.0
+  x-logo:
+    url: https://avatars.githubusercontent.com/u/76704415?s=200&v=4
 servers:
 - url: http://127.0.0.1:7777
 tags:
 - name: status
   description: Status of the api
-- name: photos
-  description: Access to users photos
-- name: user
-  description: Operations for user management
-- name: storage
-  description: Operations for folders and files
+- name: media
+  description: Access to users media items
+- name: albums
+  description: Access to users albums
+- name: accounts
+  description: Operations for account management
 paths:
   /:
     get:
@@ -28,24 +31,28 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: API running.
+                $ref: '#/components/schemas/ServerStatus'
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
     head:
       tags:
       - status
       summary: Check the status of the API.
       responses:
         200:
-          description: Indicates the current status of the api
-  /v1/photos:
+          description: OK - Indicates the current status of the api
+        500:
+          description: Internal Server Error - the server could not process the request.
+  /media:
     get:
       tags:
-      - photos
-      summary: List all photos for current user
-      description: Returns a list of photos
+      - media
+      summary: List owned and shared media items for current user
+      description: Returns a list of media items
       parameters:
         - in: query
           name: offset
@@ -56,110 +63,463 @@ paths:
           name: limit
           schema:
             type: integer
-            minimum: 1
+            minimum: 0
             maximum: 100
-            default: 50
+            default: 0
           description: Limit after which the results are skipped
       responses:
         200:
-          description: successful operation
+          description: OK - successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PhotoList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/MediaItem'
+        401:
+          description: Unauthorized - Requesting user is unauthenticated
+        403:
+          description: Forbidden - insufficient permissions to process the request.
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
       security:
+      - openId:
+        - library:read
       - OAuth2:
         - library:read
-  /v1/photo/{photoId}:
+    post:
+      tags:
+        - media
+      summary: Create one or multiple items for current user
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/NewMediaItem'
+              example:
+              - name: DSC_1234
+                date_taken: 2023-07-17T19:48:01.671Z
+              - name: DSC_1235
+                date_taken: 2023-07-17T19:48:02.956Z
+      responses:
+        201:
+          description: OK - List of newly created media item IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                example:
+                  - id: 86440223-A090-4F00-A2EF-6403C561E381
+                  - id: CACD70C8-C19B-4870-AE82-A1B9044C7288
+        401:
+          description: Unauthorized - Requesting user is unauthenticated
+        403:
+          description: Forbidden - insufficient permissions to process the request.
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+      security:
+      - openId:
+        - library:read
+        - library:write
+      - OAuth2:
+        - library:read
+        - library:write
+  /media/{media_id}:
     get:
       tags:
-      - photos
-      summary: Show detailed information for photo ID
-      description: Returns a detailed information for a single photo
+      - media
+      summary: Show detailed information for media item
+      description: Returns a detailed information for a media item
       parameters:
-      - name: photoId
+      - name: media_id
         in: path
-        description: ID of photo to return
+        description: ID of the media item to return
         required: true
         schema:
           type: string
           format: uuid
       responses:
         200:
-          description: successful operation
+          description: Ok successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PhotoDetails'
+                $ref: '#/components/schemas/MediaItem'
         400:
           description: Invalid ID supplied
           content: {}
         404:
-          description: Photo not found
+          description: Media item not found
           content: {}
       security:
+      - openId:
+        - library:read
       - OAuth2:
         - library:read
-    # post:
-    #   tags:
-    #   - photos
-    #   summary: Updates at least one property of the photo  ID
-    #   parameters:
-    #   - name: photoId
-    #     in: path
-    #     description: ID of the photo that needs to be updated
-    #     required: true
-    #     schema:
-    #       type: string
-    #       format: uuis
-    #   requestBody:
-    #     content:
-    #       application/x-www-form-urlencoded:
-    #         schema:
-    #           properties:
-    #             name:
-    #               type: string
-    #               description: Updated name of the pet
-    #             status:
-    #               type: string
-    #               description: Updated status of the pet
-    #   responses:
-    #     405:
-    #       description: Invalid input
-    #       content: {}
-    #   security:
-    #   - OAuth2:
-    #     - library:write
-    #     - library:read
-    # delete:
-    #   tags:
-    #   - photos
-    #   summary: Deletes a pet
-    #   operationId: deletePet
-    #   parameters:
-    #   - name: photoId
-    #     in: path
-    #     description: Pet id to delete
-    #     required: true
-    #     schema:
-    #       type: integer
-    #       format: int64
-    #   responses:
-    #     400:
-    #       description: Invalid ID supplied
-    #       content: {}
-    #     404:
-    #       description: Pet not found
-    #       content: {}
-    #   security:
-    #   - OAuth2:
-    #     - library:write
-    #     - library:read
-  /v1/users:
+    post:
+      tags:
+      - media
+      summary: Add files for specific media item
+      parameters:
+      - name: media_id
+        in: path
+        description: ID of the media tiem that needs to be updated
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  items:
+                    type: array
+                    format: binary
+      responses:
+        201:
+          description: Created - File added successful
+        400:
+          description: Bad Request - Request could not be processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+        401:
+          description: Unauthorized - Requesting user is unauthenticated
+        403:
+          description: Forbidden - insufficient permissions to process the request.
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+      security:
+      - openId:
+        - library:read
+        - library:write
+      - OAuth2:
+        - library:read
+        - library:write
+    patch:
+      tags:
+      - media
+      summary: Updates at least one property of the media item
+      parameters:
+      - name: media_id
+        in: path
+        description: ID of the media item that needs to be updated
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                tags:
+                  type: array
+                  items:
+                    type: string
+                    description: Tags to set for the media item
+                location:
+                  $ref: '#/components/schemas/Location'
+                date_taken:
+                  type: string
+                  format: date-time
+      responses:
+        204:
+          description: No Content - Update successful
+        400:
+          description: Bad Request - Request could not be processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+        401:
+          description: Unauthorized - Requesting user is unauthenticated
+        403:
+          description: Forbidden - insufficient permissions to process the request.
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+      security:
+      - openId:
+        - library:read
+        - library:write
+      - OAuth2:
+        - library:read
+        - library:write
+    delete:
+      tags:
+      - media
+      summary: Delete the media item if owned by the current user
+      parameters:
+      - name: media_id
+        in: path
+        description: ID of the media item that needs to be deleted
+        required: true
+        schema:
+          type: string
+          format: uuis
+      responses:
+        202:
+          description: Accepted - Media item will be deleted soon.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deadline:
+                    type: string
+                    format: date-time
+        204:
+          description: No Content - Media item has been already deleted.
+        400:
+          description: Bad Request - Invalid ID supplied
+          content: {}
+        404:
+          description: Not Found - Media item not found
+          content: {}
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+      security:
+      - openId:
+        - library:read
+        - library:write
+      - OAuth2:
+        - library:read
+        - library:write
+  /albums:
     get:
       tags:
-      - user
-      summary: Get a list of registered users
+      - albums
+      summary: List owned and shared albums for currnet user
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MediaItem'
+        401:
+          description: Unauthorized - Requesting user is unauthenticated
+        403:
+          description: Forbidden - insufficient permissions to process the request.
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+      security:
+      - openId:
+        - library:read
+      - OAuth2:
+        - library:read
+    post:
+      tags:
+      - albums
+      summary: Create a new album for current user
+      responses:
+        201:
+          description: Created - Album created successful
+          headers:
+            Location:
+              description: Location of created album
+              schema:
+                type: string
+                example: /albums/CACD70C8-C19B-4870-AE82-A1B9044C7288
+        401:
+          description: Unauthorized - Requesting user is unauthenticated
+        403:
+          description: Forbidden - insufficient permissions to process the request.
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+      security:
+      - openId:
+        - library:read
+        - library:write
+      - OAuth2:
+        - library:read
+        - library:write
+  /albums/{album_id}:
+    get:
+      tags:
+      - albums
+      summary: Get details for album
+      parameters:
+      - name: album_id
+        in: path
+        description: ID of the album to return
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        200:
+          description: Ok - successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Album'
+        401:
+          description: Unauthorized - Requesting user is unauthenticated
+        403:
+          description: Forbidden - insufficient permissions to process the request.
+        404:
+          description: Not Found - Album not found
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+      security:
+      - openId:
+        - library:read
+        - library:write
+      - OAuth2:
+        - library:read
+        - library:write
+    patch:
+      tags:
+      - albums 
+      summary: Update details for album
+      parameters:
+      - name: album_id
+        in: path
+        description: ID of the album to return
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                name:
+                  type: string
+                items:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                    description: media item IDs
+                cover:
+                  type: string
+                  format: uuid
+      responses:
+        204:
+          description: No Content - Update successful
+        400:
+          description: Bad Request - Request could not be processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+        401:
+          description: Unauthorized - Requesting user is unauthenticated
+        403:
+          description: Forbidden - insufficient permissions to process the request.
+        404:
+          description: Not Found - Album not found
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+      security:
+      - openId:
+        - library:read
+        - library:write
+      - OAuth2:
+        - library:read
+        - library:write
+    delete:
+      tags:
+      - albums
+      summary: Delete album
+      parameters:
+      - name: album_id
+        in: path
+        description: ID of the album to delete
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        202:
+          description: Accepted - Album will be deleted soon.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deadline:
+                    type: string
+                    format: date-time
+        204:
+          description: No Content - Album has been already deleted.
+        401:
+          description: Unauthorized - Requesting user is unauthenticated
+        403:
+          description: Forbidden - insufficient permissions to process the request.
+        404:
+          description: Not Found - Album not found
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+      security:
+      - openId:
+        - library:read
+        - library:write
+      - OAuth2:
+        - library:read
+        - library:write
+  /users:
+    get:
+      tags:
+      - accounts
+      summary: List of registered user accounts
       responses:
         200:
           description: successful operation
@@ -169,16 +529,95 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
+        401:
+          description: Unauthorized - Requesting user is unauthenticated
+        403:
+          description: Forbidden - insufficient permissions to process the request.
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
       security:
+      - openId:
+        - admin.users:read
       - OAuth2:
         - admin.users:read
-  /v1/user/{userId}:
+    post:
+      tags:
+      - accounts
+      summary: Create a new User
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Account'
+        required: true
+      responses:
+        201:
+          description: successful operation
+        400:
+          description: Invalid user supplied
+        401:
+          description: Unauthorized - Requesting user is unauthenticated
+        403:
+          description: Forbidden - insufficient permissions to process the request.
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+      security:
+      - openId:
+        - admin.users:write
+      - OAuth2:
+        - admin.users:write
+  /users/{user_id}/:
     get:
       tags:
-      - user
+      - accounts
       summary: Get user by user ID
       parameters:
-      - name: userId
+      - name: user_id
+        in: path
+        description: 'The user ID that needs to be fetched.'
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        200:
+          description: Ok - successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: Bad Request - Invalid ID supplied
+          content: {}
+        404:
+          description: Not Found - User not found
+          content: {}
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+      security:
+      - openId:
+        - profile
+      - OAuth2:
+        - profile
+  /users/{user_id}/profile:
+    get:
+      tags:
+      - accounts
+      summary: Get user by user ID
+      parameters:
+      - name: user_id
         in: path
         description: 'The user ID that needs to be fetched.'
         required: true
@@ -192,21 +631,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        404:
-          description: User not found
+        400:
+          description: Bad Request - Invalid ID supplied
           content: {}
+        404:
+          description: Not Found - User not found
+          content: {}
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
       security:
-      - OAuth2:
-        - openid
+      - openId:
         - profile
-        - email
+      - OAuth2:
+        - profile
     patch:
       tags:
-      - user
-      summary: Partial update to the current user
-      description: Update properties of the logged in user.
+      - accounts
+      summary: Partial update a single user account
+      description: Update properties of a single user account
       parameters:
-      - name: userId
+      - name: user_id
         in: path
         description: user ID that need to be updated
         required: true
@@ -220,281 +668,140 @@ paths:
               $ref: '#/components/schemas/User'
         required: true
       responses:
-        200:
-          description: successful operation
+        204:
+          description: No Content - successful operation
         400:
-          description: Invalid data
+          description: Bad Request - Invalid data
+          content: {}
         404:
-          description: User not found
-      security:
-      - OAuth2:
-        - openid
-        - profile
-        - email
-    delete:
-      tags:
-      - user
-      summary: Delete user
-      description: Logged in user will be deleted permanently after deadline. 
-      parameters:
-      - name: userId
-        in: path
-        description: user ID that need to be marked as deleted
-        required: true
-        schema:
-          type: string
-      responses:
-        202:
-          description: User will be deleted soon.
+          description: Not Found - User not found
+          content: {}
+        500:
+          description: Internal Server Error - the server could not process the request.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  deadline:
-                    type: string
-                    format: date-time
-        400:
-          description: Invalid username supplied
-          content: {}
-        404:
-          description: User not found
-          content: {}
+                $ref: '#/components/schemas/ServiceError'
       security:
-      - OAuth2:
-        - openid
-        - profile
-        - email
-  /v1/user:
-    get:
-      tags:
-      - user
-      summary: Return detailed information of the current loggedin user
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
-      security:
-      - OAuth2:
-        - openid
-        - profile
-        - email
-    post:
-      tags:
-      - user
-      summary: Create a new User
-      requestBody:
-        description: Updated user object
-        content:
-          'application/json':
-            schema:
-              $ref: '#/components/schemas/Account'
-        required: true
-      responses:
-        201:
-          description: successful operation
-        400:
-          description: Invalid user supplied
-      security:
+      - openId:
+        - admin.users:write
       - OAuth2:
         - admin.users:write
-  # /v1/directories:
-  #   get:
-  #     tags:
-  #       - storage
-  #     summary: get a list of available directories
-  #     responses:
-  #       200:
-  #         description: successful operation
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: array
-  #               items: 
-  #                 $ref: '#/components/schemas/Directory'
-  #     security:
-  #     - OAuth2:
-  #       - library:write
-  # /v1/directories/{directoryId}:
-  #   post:
-  #     tags:
-  #       - storage
-  #     summary: provision a directory to a specific user
-  #     parameters:
-  #     - name: directoryId
-  #       in: path
-  #       description: The directory ID to map to the current user.
-  #       required: true
-  #       schema:
-  #         type: string
-  #         format: uuid
-  #     responses:
-  #       200:
-  #         description: successful operation
-  #       400:
-  #         description: failed operation
-  #     security:
-  #     - OAuth2:
-  #       - library:write
-  #   delete:
-  #     tags:
-  #       - storage
-  #     summary: abandon this directory from a specific user
-  #     parameters:
-  #     - name: directoryId
-  #       in: path
-  #       description: The directory ID to abandon from the current user.
-  #       required: true
-  #       schema:
-  #         type: string
-  #         format: uuid
-  #     responses:
-  #       200:
-  #         description: successful operation
-  #     security:
-  #     - OAuth2:
-  #       - library:write
-  # /v1/directories/{directoryId}/scan:
-  #   get:
-  #     tags:
-  #       - storage
-  #     summary: get the current scan status.
-  #     parameters:
-  #     - name: directoryId
-  #       in: path
-  #       description: The directory ID to check the status for.
-  #       required: true
-  #       schema:
-  #         type: string
-  #         format: uuid
-  #     responses:
-  #       200:
-  #         description: successful operation
-  #     security:
-  #     - OAuth2:
-  #       - library:write
-  #   post:
-  #     tags:
-  #       - storage
-  #     summary: start a newdirectory scan.
-  #     parameters:
-  #     - name: directoryId
-  #       in: path
-  #       description: The directory ID to scan.
-  #       required: true
-  #       schema:
-  #         type: string
-  #         format: uuid
-  #     responses:
-  #       200:
-  #         description: successful operation
-  #     security:
-  #     - OAuth2:
-  #       - library:write
-  /v1/file/{fileId}:
-    get:
+  /users/{user_id}/disable:
+    patch:
       tags:
-      - storage
-      summary: request a specifig file
+      - accounts
+      summary: Disable single user account
+      description: Set a single user account to disabled.
       parameters:
-      - name: fileId
+      - name: user_id
         in: path
-        description: ID of file to load
+        description: user ID that need to be marked as disabled
         required: true
         schema:
           type: string
-          format: uuid
       responses:
-        200:
-          description: successful operation
-          content:
-            image/jpeg:
-              schema:
-                type: string
-                format: byte
-      security:
-      - OAuth2:
-        - library:read
-  /v1/file:
-    post:
-      tags:
-      - storage
-      summary: uploads an image
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              properties:
-                additionalMetadata:
-                  type: string
-                  description: Additional data to pass to server
-                file:
-                  type: string
-                  description: file to upload
-                  format: binary
-      responses:
-        200:
-          description: successful operation
+        204:
+          description: No Content - operation successful
+        400:
+          description: Bad Request - Invalid data
+          content: {}
+        404:
+          description: Not Found - User not found
+          content: {}
+        500:
+          description: Internal Server Error - the server could not process the request.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Photo'
+                $ref: '#/components/schemas/ServiceError'
       security:
+      - openId:
+        - admin.users:write
       - OAuth2:
-        - library:write
+        - admin.users:write
+  /users/{user_id}/enable:
+    patch:
+      tags:
+      - accounts
+      summary: Enable single user account
+      description: Set a single user account to enabled.
+      parameters:
+      - name: user_id
+        in: path
+        description: user ID that need to be marked as enabled
+        required: true
+        schema:
+          type: string
+      responses:
+        204:
+          description: No Content - operation successful
+        400:
+          description: Bad Request - Invalid data
+          content: {}
+        404:
+          description: Not Found - User not found
+          content: {}
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+      security:
+      - openId:
+        - admin.users:write
+      - OAuth2:
+        - admin.users:write
 components:
   schemas:
-    PhotoList:
+    ServiceError:
+      properties:
+        errorCode:
+          description: The error code mapped to the error message.
+          type: string
+        errorType:
+          description: The category of the error.
+          type: string
+        message:
+          description: A short explanation of the issue.
+          type: string
+    ServerStatus:
       type: object
       properties:
-        offset:
-          type: integer
-          format: int32
-        limit:
-          type: integer
-          format: int32
-          default: 50
-        size:
-          type: integer
-          format: int32
-          default: 10
-        results:
+        message:
+          type: string
+          example: API running.
+        provider:
           type: array
           items:
-            $ref: '#/components/schemas/Photo'
-    Photo:
+            $ref: '#/components/schemas/AuthProvider'
+    AuthProvider:
       type: object
+      properties:
+        name:
+          type: string
+          example: Google
+        issue:
+          type: string
+          example: https://accounts.google.com
+    MediaItem:
+      type: object
+      required:
+        - id
+        - name
+        - date_added
       properties:
         id:
           type: string
           format: uuid
         name:
           type: string
-          example: filename.ext
-        image_url:
-          type: string
-          format: uri
-    PhotoDetails:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-          example: filename.ext
-        owner:
-          type: string
-          example: lastname, firstname
-        created_at:
+          example: DSC_1234
+        date_added:
           type: string
           format: date-time
-        modified_at:
+        date_taken:
           type: string
           format: date-time
         details:
@@ -503,50 +810,130 @@ components:
           type: array
           items:
             type: string
-            example: landscape
+          example: 
+            - Landscape
+            - Beach
+            - Sunset
         location:
           $ref: '#/components/schemas/Location'
-        image_url:
+        references:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+          example:
+              - id: 86440223-A090-4F00-A2EF-6403C561E381
+                filename: DSC_1234.NEF
+                filesize: 89173760
+                last_modified: 2023-07-17T19:48:01.671Z
+                is_missing: false
+              - id: 8066B813-1DBF-4865-A773-E9C11CDED3E0
+                filename: DSC_1234.jpg
+                filesize: 717857
+                last_modified: 2023-07-17T19:48:01.671Z
+                is_missing: false
+              - id: CACD70C8-C19B-4870-AE82-A1B9044C7288
+                filename: DSC_1234.xmp
+                filesize: 9321
+                last_modified: 2023-07-17T19:48:01.671Z
+                is_missing: false
+    NewMediaItem:
+      type: object
+      required:
+        - name
+      properties:
+        name:
           type: string
-          format: uri
+          example: DSC_1234
+        date_taken:
+          type: string
+          format: date-time
+    File:
+      type: object
+      required:
+        - id
+        - filename
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: F4E5FD51-7F39-4203-8454-8C44B3841F36
+        filename:
+          type: string
+          example: DSC_1234.xmp
+        filesize:
+          type: integer
+          format: int64
+          example: 89173760
+        last_modified:
+          type: string
+          format: date-time
+        is_missing:
+          type: boolean
+          example: false
+    Album:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: Hiking
+        cover:
+          type: string
+          format: uuid
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaItem'
     Location:
       type: object
       properties:
         latitude:
           type: number
-          example: 20.000000
+          example: 48.13683
         longitude:
           type: number
-          example: 30.000000
+          example: 11.57568
         altitude:
           type: number
-          example: 0.0
+          example: 515
     ExifInformation:
       type: object
       properties:
         camera:
           type: string
+          example: Nikon Z7
         lens:
           type: string
+          example: NIKKOR Z 28-75mm f/2.8
         focal_length:
           type: string
+          example: 55mm
         iso:
           type: string
+          example: 200
         shutter_speed:
           type: string
+          example: 1/500
         aperture:
           type: string
+          example: F3.2
     User:
       type: object
       properties:
         id:
           type: string
           format: uuid
+        nickname:
+          type: string
+          example: j.doe
         lastname:
           type: string
+          example: Doe
         firstname:
           type: string
-          format: password
+          example: Jane
         lastSeen:
           type: string
           format: date-time
@@ -555,7 +942,7 @@ components:
       properties:
         email:
           type: string
-          format: uuid
+          format: email
         lastname:
           type: string
         firstname:
@@ -564,15 +951,10 @@ components:
         password:
           type: string
           format: password
-    # Directory:
-    #   type: object
-    #   properties:
-    #     id:
-    #       type: string
-    #       format: uuid
-    #     name:
-    #       type: string
   securitySchemes:
+    openId:
+      type: openIdConnect
+      openIdConnectUrl: https://127.0.0.1:7777/.well-known/openid-configuration
     OAuth2:
       type: oauth2
       flows:
