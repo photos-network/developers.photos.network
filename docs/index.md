@@ -5,7 +5,7 @@ hide:
 ---
 # Developer documentation
 
-This documentation is targeting developers for [Photos.network](https://photos.network) a free and open source, privacy first, self-hosted photo storage and sharing service.
+This documentation is targeting developers for [Photos.network](https://photos.network) is a self-hosted, privacy first and extensible photo storage and sharing service.
 
 !!! hint "Not a developer?"
     If you are interested in hosting your own photos.network server, visit [our main website](https://photos.network)
@@ -20,10 +20,13 @@ To keep a positive social atmosphere in this project, some decicions and require
 
 - [x] write beginner friendly code[^1]
 - [x] avoid full-stack frameworks[^2]
-- [x] use [PEP 484: Type Hints](https://www.python.org/dev/peps/pep-0484/) in the code syntax.
-- [x] follow the [PEP 8: Style Guide](https://www.python.org/dev/peps/pep-0008/) coding conventions.
+
+---
+
+!!! failure "MvP - Minimum Viable Product"
+    After the python PoC the whole project was re-written in Rust. Not all functionality is migrated nor available.
+
 
 [^1]: Write clean and maintable code so beginner level programmers can understand it. 
 This can increase the willingness of new contributors.
-Separate code in packages and classes, write tests
-[^2]: Full-stack frameworks are great, especially for prototyping and fast development. Often they are coupling components which can lead to a time-consuming development process  
+[^2]: Full-stack frameworks are great, especially for prototyping and fast development. Often they are coupling components which can lead to a time-consuming development process.

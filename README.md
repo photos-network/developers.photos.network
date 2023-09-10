@@ -5,7 +5,7 @@
 [![Discord](https://img.shields.io/discord/793235453871390720)](https://discord.gg/dGFDpmWp46)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/photos-network/developers.photos.network/build%20and%20deploy%20github%20pages)
 
-[Photos.network](https://photos.network) is a privacy first, self-hosted photo storage and sharing service.
+[Photos.network](https://photos.network) is a self-hosted, privacy first and extensible photo storage and sharing service.
 
 Its core features are:
 - Share photos with friends, family or public

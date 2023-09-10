@@ -1,7 +1,10 @@
 {
   "name": "Photos.network Developer Documentation",
   "image": "squidfunk/mkdocs-material",
-  "extensions": ["ms-python.python"],
+  "extensions": [
+    "ms-python.python"
+  ],
+  "postCreateCommand": "pip install -r requirements.txt",
   "settings": {
     "python.pythonPath": "/usr/local/bin/python",
     "editor.formatOnPaste": true,

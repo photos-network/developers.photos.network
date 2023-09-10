@@ -51,8 +51,8 @@ paths:
     get:
       tags:
       - media
-      summary: List owned and shared media items for current user
-      description: Returns a list of media items
+      summary: Returns a list of owned media items for current user
+      description: List all media items owned by the current user. Shared items are not included, they are only refered as albums.
       parameters:
         - in: query
           name: offset
@@ -71,6 +71,9 @@ paths:
         200:
           description: OK - successful operation
           content:
+            text/plain:
+              schema:
+                type: string
             application/json:
               schema:
                 type: array
@@ -94,14 +97,13 @@ paths:
     post:
       tags:
         - media
-      summary: Create one or multiple items for current user
+      summary: Creates a new media item to aggregate related files for current user
+      description: Creates a container where the current user can upload multiple references like image files, videos, overlays or additional metadata.
       requestBody:
         content:
           multipart/form-data:
             schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/NewMediaItem'
+              $ref: '#/components/schemas/NewMediaItem'
               example:
               - name: DSC_1234
                 date_taken: 2023-07-17T19:48:01.671Z
@@ -123,6 +125,16 @@ paths:
                 example:
                   - id: 86440223-A090-4F00-A2EF-6403C561E381
                   - id: CACD70C8-C19B-4870-AE82-A1B9044C7288
+        303:
+          description: See Other - Media item with same name and date_taken already exists for current user
+          headers:
+            Location:
+              description: Location of existing media item
+              schema:
+                type: string
+                example: /media/CACD70C8-C19B-4870-AE82-A1B9044C7288
+        400:
+          description: Invalid request supplied - Requested media ID is not a valid uuid
         401:
           description: Unauthorized - Requesting user is unauthenticated
         403:
@@ -144,8 +156,8 @@ paths:
     get:
       tags:
       - media
-      summary: Show detailed information for media item
-      description: Returns a detailed information for a media item
+      summary: Returns a specific owned or shared media item for current user
+      description: The media item does not need to belong to the current user, just Access needs to be granted by the media item owner.
       parameters:
       - name: media_id
         in: path
@@ -162,11 +174,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/MediaItem'
         400:
-          description: Invalid ID supplied
-          content: {}
+          description: Invalid request supplied
+        401:
+          description: Unauthorized - Requesting user is unauthenticated
+        403:
+          description: Forbidden - insufficient permissions to process the request.
         404:
           description: Media item not found
-          content: {}
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
       security:
       - openId:
         - library:read
@@ -175,7 +195,8 @@ paths:
     post:
       tags:
       - media
-      summary: Add files for specific media item
+      summary: Add files for a specific media item
+      description: The media item needs to be owned by the user to add additional file references.
       parameters:
       - name: media_id
         in: path
@@ -223,7 +244,8 @@ paths:
     patch:
       tags:
       - media
-      summary: Updates at least one property of the media item
+      summary: Updates fields from a specific media item for current user
+      description: Change or add Tags, the location or date and time of the media item owned by the current user.
       parameters:
       - name: media_id
         in: path
@@ -277,6 +299,7 @@ paths:
       tags:
       - media
       summary: Delete the media item if owned by the current user
+      description: All related references are deleted asynchronously since it might take some time regarding used filesystem. The call will respond with `HTTP 202` and a given date-time or with a `HTTP 204` if the deleteion is finished.
       parameters:
       - name: media_id
         in: path
@@ -475,6 +498,7 @@ paths:
       tags:
       - albums
       summary: Delete album
+      description: Only the album is deleted and all related items stay on the system.
       parameters:
       - name: album_id
         in: path
@@ -574,7 +598,7 @@ paths:
         - admin.users:write
       - OAuth2:
         - admin.users:write
-  /users/{user_id}/:
+  /users/{user_id}:
     get:
       tags:
       - accounts
@@ -597,43 +621,8 @@ paths:
         400:
           description: Bad Request - Invalid ID supplied
           content: {}
-        404:
-          description: Not Found - User not found
-          content: {}
-        500:
-          description: Internal Server Error - the server could not process the request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServiceError'
-      security:
-      - openId:
-        - profile
-      - OAuth2:
-        - profile
-  /users/{user_id}/profile:
-    get:
-      tags:
-      - accounts
-      summary: Get user by user ID
-      parameters:
-      - name: user_id
-        in: path
-        description: 'The user ID that needs to be fetched.'
-        required: true
-        schema:
-          type: string
-          format: uuid
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        400:
-          description: Bad Request - Invalid ID supplied
-          content: {}
+        403:
+          description: Forbidden - insufficient permissions to process the request.
         404:
           description: Not Found - User not found
           content: {}
@@ -688,7 +677,7 @@ paths:
       - OAuth2:
         - admin.users:write
   /users/{user_id}/disable:
-    patch:
+    put:
       tags:
       - accounts
       summary: Disable single user account
@@ -721,7 +710,7 @@ paths:
       - OAuth2:
         - admin.users:write
   /users/{user_id}/enable:
-    patch:
+    put:
       tags:
       - accounts
       summary: Enable single user account
@@ -757,12 +746,6 @@ components:
   schemas:
     ServiceError:
       properties:
-        errorCode:
-          description: The error code mapped to the error message.
-          type: string
-        errorType:
-          description: The category of the error.
-          type: string
         message:
           description: A short explanation of the issue.
           type: string
@@ -805,7 +788,7 @@ components:
           type: string
           format: date-time
         details:
-          $ref: '#/components/schemas/ExifInformation'
+          $ref: '#/components/schemas/Exif'
         tags:
           type: array
           items:
@@ -895,10 +878,7 @@ components:
         longitude:
           type: number
           example: 11.57568
-        altitude:
-          type: number
-          example: 515
-    ExifInformation:
+    Exif:
       type: object
       properties:
         camera:

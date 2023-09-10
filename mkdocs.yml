@@ -49,19 +49,17 @@ nav:
   - "Core":
       - "Getting started": "core/index.md"
       - "Structure": "core/structure.md"
-      - "Environment": "core/env.md"
       - "Authentication": "core/authentication.md"
       - "Authorization flow": "core/authentication_flow.md"
       - "Authorization": "core/authorization.md"
       - "User management": "core/user_management.md"
       - "Configuration": "core/configuration.md"
-  - "Addons":
-      - "Create an addon": "addons/index.md"
-      - "api": "addons/api.md"
-      - "metadata": "addons/metadata.md"
-      - "nextcloud": "addons/nextcloud.md"
-      - "places365": "addons/places365.md"
-      - "sqlite": "addons/sqlite.md"
+  - "Plugins":
+      - "Create an addon": "plugins/index.md"
+      - "api": "plugins/api.md"
+      - "metadata": "plugins/metadata.md"
+      - "nextcloud": "plugins/nextcloud.md"
+      - "places365": "plugins/places365.md"
   - "Frontend":
       - "Getting started": "frontend/index.md"
       - "Grid": "frontend/grid.md"
@@ -74,7 +72,6 @@ nav:
       - "General": "mobile/index.md"
       - "Android": "mobile/android/index.md"
       - "iOS": "mobile/ios/index.md"
-  - "Supervisor": "supervisor/index.md"
   - "FAQ": "faq.md"
 
 # Theme

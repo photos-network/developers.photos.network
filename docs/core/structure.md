@@ -6,40 +6,35 @@ hide:
 Since the core system is responsible for multiple tasks,
 it is mandatory to keep the file structure clean and well arranged.
 
-The project itself has a default python application file structure.
+The project itself has a default application structure with some internal crates.
 ```shell
 core/
-├── core/
+├── src/
+    ├── main.rs
+    └── lib.rs
 ├── tests/
-├── setup.cfg
-└── setup.py
+├── crates/
+    ├── accounts/
+    ├── activity_pub/
+    ├── common/
+    ├── database/
+    ├── media/
+    ├── oauth_authentication/
+    ├── oauth_authorization_server/
+    └── plugin_interface/
+└── Cargo.toml
 ```
-
-inside the core package all necessary files are structured inside subfolders. 
-```shell
-core/
-└── core/
-    ├── __main__.py
-    ├── addon.py
-    ├── addons/
-    ├── authentication/
-    ├── authorization/
-    ├── configs.py
-    ├── const.py
-    ├── core.py
-    ├── loader.py
-    ├── persistency/
-    ├── utils/
-    └── webserver/
-```
-               
-| File | Description |
-| ---  | --- |
-| \__main__.py | is the entry point and will only read the configuration file and create an application instance. |
-| core.py | will monitor the application state and manage all base tasks e.g. setup and load **addons** and starting the **webserver**. |
-| addon.py | defines how addons are loaded |
-| config.py | abstracts the RuntimeConfiguration and Configuration |
-| const.py | contains development constants e.g.: versions |
-| core.py | application logic |
-| loader.py | helper to load addons |
-
+   
+| File    | Description |
+| ------  | --- |
+| main.rs | is the entry point of the application and will only load `lib.rs`. |
+| lib.rs  | will read the configuration, create necessary folders, create an application instance and loads **plugins**. |
+| tests   | contains integration test for the whole application. |
+| creates/account | handles all account related endpoints for user management. |
+| creates/activity_pub | Adds support for fediverse. |
+| creates/common | shared code like re-usable structs. |
+| creates/database | abstracts the database persistency for the application. |
+| creates/media | media related endpoints |
+| creates/oauth_authentication | OAuth/OpenID endpoints to support 3rd party login. |
+| creates/oauth_authorization_server | OAuth server to provide a standalone and offline capable login. |
+| creates/plugin_interface | Interfaces used by the plugin system. |
