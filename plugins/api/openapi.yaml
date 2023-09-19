@@ -107,24 +107,16 @@ paths:
               example:
               - name: DSC_1234
                 date_taken: 2023-07-17T19:48:01.671Z
-              - name: DSC_1235
-                date_taken: 2023-07-17T19:48:02.956Z
       responses:
         201:
-          description: OK - List of newly created media item IDs
+          description: OK - Newly created media item ID
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                      format: uuid
+                type: string
+                format: uuid
                 example:
                   - id: 86440223-A090-4F00-A2EF-6403C561E381
-                  - id: CACD70C8-C19B-4870-AE82-A1B9044C7288
         303:
           description: See Other - Media item with same name and date_taken already exists for current user
           headers:
@@ -134,9 +126,9 @@ paths:
                 type: string
                 example: /media/CACD70C8-C19B-4870-AE82-A1B9044C7288
         400:
-          description: Invalid request supplied - Requested media ID is not a valid uuid
+          description: Invalid request supplied - Requested media ID is not a valid uuid or date_taken is an invalid format.
         401:
-          description: Unauthorized - Requesting user is unauthenticated
+          description: Unauthorized - Requesting user is unauthenticated.
         403:
           description: Forbidden - insufficient permissions to process the request.
         500:
@@ -823,6 +815,7 @@ components:
       type: object
       required:
         - name
+        - date_taken
       properties:
         name:
           type: string
