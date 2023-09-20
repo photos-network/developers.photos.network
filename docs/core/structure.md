@@ -10,18 +10,18 @@ The project itself has a default application structure with some internal crates
 ```shell
 core/
 ├── src/
-    ├── main.rs
-    └── lib.rs
+│   ├── main.rs
+│   └── lib.rs
 ├── tests/
 ├── crates/
-    ├── accounts/
-    ├── activity_pub/
-    ├── common/
-    ├── database/
-    ├── media/
-    ├── oauth_authentication/
-    ├── oauth_authorization_server/
-    └── plugin_interface/
+│   ├── accounts/
+│   ├── activity_pub/
+│   ├── common/
+│   ├── database/
+│   ├── media/
+│   ├── oauth_authentication/
+│   ├── oauth_authorization_server/
+│   └── plugin_interface/
 └── Cargo.toml
 ```
    
@@ -38,3 +38,16 @@ core/
 | creates/oauth_authentication | OAuth/OpenID endpoints to support 3rd party login. |
 | creates/oauth_authorization_server | OAuth server to provide a standalone and offline capable login. |
 | creates/plugin_interface | Interfaces used by the plugin system. |
+
+
+## Dependencies
+
+Dependencies are shared in the project by using a Cargo workspace and defined in the `Cargo.toml`.
+Within the internal crates they are just referenced. If a custom feature is required, it is defined in the internal crate instead.
+```toml title="crate/media/Cargo.toml"
+[dependencies]
+axum.workspace = true
+serde = { workspace = true, features = ["derive"] }
+```
+
+This will reduce a miss-matched dependency configuration.

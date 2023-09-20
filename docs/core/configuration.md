@@ -3,8 +3,9 @@ hide:
 - toc
 ---
 # Configuration File
-To run an instance of the core system will require a configuration file.
-It will define the place to write and read data from or wich addons should be loaded on startup.
+
+A default configuration file will be created in **config/core.json``` on the first startup of the core instance.
+Additional infos especially to configure plugins, require a restart.
 
 Some addons still needed to be configured by the users itself.
 

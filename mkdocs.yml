@@ -26,7 +26,7 @@ extra:
 
 markdown_extensions:
   - pymdownx.highlight:
-      linenums: true
+      linenums: false
   - admonition
   - attr_list
   - pymdownx.details
@@ -38,6 +38,11 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 strict: true
 
@@ -49,6 +54,7 @@ nav:
   - "Core":
       - "Getting started": "core/index.md"
       - "Structure": "core/structure.md"
+      - "Persistency": "core/persistency.md"
       - "Authentication": "core/authentication.md"
       - "Authorization flow": "core/authentication_flow.md"
       - "Authorization": "core/authorization.md"
@@ -94,3 +100,4 @@ theme:
   features:
     - navigation.instant
     - navigation.tabs
+    - navigation.top
