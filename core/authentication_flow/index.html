@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.3.1">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.3.2">
     
     
       
@@ -30,7 +30,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.046329b4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.30068a00.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
@@ -467,6 +467,26 @@
   
   <span class="md-ellipsis">
     Structure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../persistency/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Persistency
   </span>
   
 
@@ -1236,106 +1256,79 @@
 <blockquote>
 <p>The client (Frontend) initiates the Authorization Code Grant flow by directing the user to the authorization endpoint.</p>
 </blockquote>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nf">GET</span> <span class="nn">/oauth/authorize</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre><span></span><code><span class="nf">GET</span> <span class="nn">/oauth/authorize</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="o">:</span> <span class="l">core.photos.network</span>
 <span class="na">Accept-Language</span><span class="o">:</span> <span class="l">en-US,en;q=0.8</span>
 
 client_id=CLIENT_ID&amp;redirect_uri=http://frontend.photos.network&amp;scope=&lt;SCOPES&gt;&amp;response_type=code&amp;response_mode=query&amp;state=&lt;NONCE&gt;
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 <blockquote>
 <p>The authorization server will show a login dialog with a list of requested scopes.</p>
 </blockquote>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>  =======
+<div class="highlight"><pre><span></span><code>  =======
   username:
   password:
   =======
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 <h4 id="login-request">Login Request</h4>
 <blockquote>
 <p>The resource owner (<em>User</em>) grants the client's (<em>Frontend</em>) access request by authenticating himself/herself with credentials (username / password) to the authorization server</p>
 </blockquote>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nf">POST</span> <span class="nn">/oauth/authorize</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/oauth/authorize</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="o">:</span> <span class="l">core.photos.network</span>
 
 uname=test&amp;password=secret
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 <h4 id="authorization-response"><a href="https://tools.ietf.org/html/rfc6749#section-4.1.2">Authorization Response</a></h4>
 <blockquote>
 <p>The authorization server redirects the resource owner (<em>User</em>) to the client (<em>Frontend</em>) using the redirection URI provided in the Authorization Request</p>
 </blockquote>
 <p>access denied
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>&lt;REDIRECT_URI&gt;
+<div class="highlight"><pre><span></span><code>&lt;REDIRECT_URI&gt;
   error=access_denied&amp;
   error_description=The user did not consent.
-</code></pre></div></td></tr></table></div></p>
+</code></pre></div></p>
 <p>access granted
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>&lt;REDIRECT_URI&gt;
+<div class="highlight"><pre><span></span><code>&lt;REDIRECT_URI&gt;
   code=zuzuRerfdg543ljf023&amp;
   state=abcdef
-</code></pre></div></td></tr></table></div></p>
+</code></pre></div></p>
 <hr />
 <h2 id="access-token-request"><a href="https://tools.ietf.org/html/rfc6749#section-4.1.3">Access Token Request</a></h2>
 <blockquote>
 <p>The client (<em>Frontend</em>) requests an access token from the authorization server's token endpoint by including the authorization code</p>
 </blockquote>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nf">POST</span> <span class="nn">/oauth/token</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/oauth/token</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
 
 <span class="nt">client_id</span><span class="o">=</span><span class="s">&lt;CLIENT_ID&gt;client_secret</span><span class="o">=</span><span class="s">&lt;CLIENT_SECRET&gt;</span><span class="p">&amp;</span><span class="nt">grant_type</span><span class="o">=</span><span class="s">authorization_code</span><span class="p">&amp;</span><span class="nt">code</span><span class="o">=</span><span class="s">zuzuRerfdg543ljf023</span><span class="p">&amp;</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 <h3 id="access-token-response"><a href="https://tools.ietf.org/html/rfc6749#section-4.1.4">Access Token Response</a></h3>
 <blockquote>
 <p>The authorization server responds an access token and a refresh token.</p>
 </blockquote>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;access_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTMyMzM4Mjh9.8U4oXtAHEkYgZldFMduANu-ryhTN5RX69XslPzU7pnQ&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;token_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bearer&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;expires_in&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;refresh_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTMyMzA4ODN9.4kFQD33F7-xQPUWSM9IxsDYqv30zAEa7WS7jpk8NtFU&quot;</span>
 <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 <h2 id="refreshing-an-access-token"><a href="https://tools.ietf.org/html/rfc6749#section-6">Refreshing an Access Token</a></h2>
 <blockquote>
 <p>The client (<em>Frontend</em>) makes a refresh request to the authorization server's token endpoint</p>
 </blockquote>
 <p><strong>Hint:</strong> grant_type have to be <code>refresh_token</code></p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nf">POST</span> <span class="nn">/oauth/token</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/oauth/token</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
 
 <span class="nt">client_id</span><span class="o">=</span><span class="s">&lt;CLIENT_ID&gt;</span><span class="p">&amp;</span><span class="nt">client_secret</span><span class="o">=</span><span class="s">&lt;CLIENT_SECRET&gt;</span><span class="p">&amp;</span><span class="nt">grant_type</span><span class="o">=</span><span class="s">refresh_token</span><span class="p">&amp;</span><span class="nt">code</span><span class="o">=</span><span class="s">zuzuRerfdg543ljf023</span><span class="p">&amp;</span>
 <span class="nt">refresh_token</span><span class="o">=</span><span class="s">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTMyMzA4ODN9.4kFQD33F7-xQPUWSM9IxsDYqv30zAEa7WS7jpk8NtFU</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 <h2 id="access-protected-endpoints">Access protected endpoints</h2>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nf">GET</span> <span class="nn">/api/photo</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre><span></span><code><span class="nf">GET</span> <span class="nn">/api/photo</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;ACCESS_TOKEN&gt;</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
 
 
 
@@ -1347,6 +1340,12 @@ uname=test&amp;password=secret
           
           
         </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
         
       </main>
       
@@ -1403,7 +1402,7 @@ uname=test&amp;password=secret
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "0.1.0"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.top"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "0.1.0"}</script>
     
     
       <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>

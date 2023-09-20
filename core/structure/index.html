@@ -18,11 +18,11 @@
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="../authentication/">
+        <link rel="next" href="../persistency/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.3.1">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.3.2">
     
     
       
@@ -30,7 +30,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.046329b4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.30068a00.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
@@ -473,6 +473,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Structure
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -483,6 +494,52 @@
 
       </a>
       
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../persistency/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Persistency
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1059,6 +1116,21 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1079,36 +1151,22 @@
 <p>Since the core system is responsible for multiple tasks,
 it is mandatory to keep the file structure clean and well arranged.</p>
 <p>The project itself has a default application structure with some internal crates.
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code>core/
+<div class="highlight"><pre><span></span><code>core/
 ├──<span class="w"> </span>src/
-<span class="w">    </span>├──<span class="w"> </span>main.rs
-<span class="w">    </span>└──<span class="w"> </span>lib.rs
+│<span class="w">   </span>├──<span class="w"> </span>main.rs
+│<span class="w">   </span>└──<span class="w"> </span>lib.rs
 ├──<span class="w"> </span>tests/
 ├──<span class="w"> </span>crates/
-<span class="w">    </span>├──<span class="w"> </span>accounts/
-<span class="w">    </span>├──<span class="w"> </span>activity_pub/
-<span class="w">    </span>├──<span class="w"> </span>common/
-<span class="w">    </span>├──<span class="w"> </span>database/
-<span class="w">    </span>├──<span class="w"> </span>media/
-<span class="w">    </span>├──<span class="w"> </span>oauth_authentication/
-<span class="w">    </span>├──<span class="w"> </span>oauth_authorization_server/
-<span class="w">    </span>└──<span class="w"> </span>plugin_interface/
+│<span class="w">   </span>├──<span class="w"> </span>accounts/
+│<span class="w">   </span>├──<span class="w"> </span>activity_pub/
+│<span class="w">   </span>├──<span class="w"> </span>common/
+│<span class="w">   </span>├──<span class="w"> </span>database/
+│<span class="w">   </span>├──<span class="w"> </span>media/
+│<span class="w">   </span>├──<span class="w"> </span>oauth_authentication/
+│<span class="w">   </span>├──<span class="w"> </span>oauth_authorization_server/
+│<span class="w">   </span>└──<span class="w"> </span>plugin_interface/
 └──<span class="w"> </span>Cargo.toml
-</code></pre></div></td></tr></table></div></p>
+</code></pre></div></p>
 <table>
 <thead>
 <tr>
@@ -1163,6 +1221,14 @@ it is mandatory to keep the file structure clean and well arranged.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="dependencies">Dependencies</h2>
+<p>Dependencies are shared in the project by using a Cargo workspace and defined in the <code>Cargo.toml</code>.
+Within the internal crates they are just referenced. If a custom feature is required, it is defined in the internal crate instead.
+<div class="highlight"><span class="filename">crate/media/Cargo.toml</span><pre><span></span><code><span class="k">[dependencies]</span>
+<span class="n">axum</span><span class="p">.</span><span class="n">workspace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">serde</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">workspace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true</span><span class="p">,</span><span class="w"> </span><span class="n">features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;derive&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></p>
+<p>This will reduce a miss-matched dependency configuration.</p>
 
 
 
@@ -1176,6 +1242,12 @@ it is mandatory to keep the file structure clean and well arranged.</p>
           
           
         </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
         
       </main>
       
@@ -1232,7 +1304,7 @@ it is mandatory to keep the file structure clean and well arranged.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "0.1.0"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.top"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "0.1.0"}</script>
     
     
       <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
