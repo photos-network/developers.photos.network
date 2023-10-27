@@ -149,7 +149,7 @@ paths:
       tags:
       - media
       summary: Returns a specific owned or shared media item for current user
-      description: The media item does not need to belong to the current user, just Access needs to be granted by the media item owner.
+      description: The media item does not need to belong to the current user, just access needs to be granted by the media item owner.
       parameters:
       - name: media_id
         in: path
@@ -332,6 +332,54 @@ paths:
       - OAuth2:
         - library:read
         - library:write
+  /media/{media_id}/{reference_id}:
+    get:
+      tags:
+      - media
+      summary: Return a specific reference for the media id
+      description: The reference item does not need to belong to the current user, just access needs to be granted by the media item owner.
+      parameters:
+      - name: media_id
+        in: path
+        description: ID of the media item to return
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: reference_id
+        in: path
+        description: ID of the reference item to return
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        200:
+          description: Ok successful operation
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+        400:
+          description: Invalid request supplied
+        401:
+          description: Unauthorized - Requesting user is unauthenticated
+        403:
+          description: Forbidden - insufficient permissions to process the request.
+        404:
+          description: Media item not found
+        500:
+          description: Internal Server Error - the server could not process the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+      security:
+      - openId:
+        - library:read
+      - OAuth2:
+        - library:read
   /albums:
     get:
       tags:
